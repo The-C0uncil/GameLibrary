@@ -1,0 +1,208 @@
+﻿@model List<GameLibrary.Models.Game>
+
+<div class="games-grid-container">
+    <div class="games-grid" id="gamesGrid">
+        @foreach (var game in Model)
+        {
+            var isUnavailable = !game.Availability;
+            var cardClass = "game-card" + (isUnavailable ? " unavailable" : "");
+
+            <div class="@cardClass"
+                data-game-name="@game.TabletopGame"
+                data-sort-name="@game.TabletopGame"
+                data-sort-bgg="@game.BGGScore"
+                data-sort-complexity="@game.Complexity"
+                data-sort-playtime="@game.AvgPlaytime"
+                data-sort-players="@game.PlayerCount"
+                data-filter-category="@game.Category"
+                data-filter-theme="@game.Theme"
+                data-filter-tier="@game.Tier"
+                data-filter-type="@game.Type"
+                data-filter-complexity="@game.Complexity"
+                data-filter-availability="@(isUnavailable ? "unavailable" : "available")"
+                @(isUnavailable ? "aria-disabled=true" : "")>
+
+                <!-- Image area -->
+                <div class="card-img-wrap">
+                    @if (!string.IsNullOrEmpty(game.Cover))
+                    {
+                        <img src="~/images/covers/@($"{game.Cover}.webp")" alt="@game.TabletopGame">
+                    }
+                    else
+                    {
+                        <img src="~/images/placeholder.svg" alt="@game.TabletopGame">
+                    }
+
+                    <!-- Top-right badges -->
+                    <div class="overlay-badges">
+                        @if (!string.IsNullOrEmpty(game.Tier?.ToString()))
+                        {
+                            <div class="badge-circle badge-tier" title="Tier">@game.Tier</div>
+                        }
+                        @if (!string.IsNullOrEmpty(game.Age?.ToString()))
+                        {
+                            <div class="badge-circle badge-age" title="Minimum age">@game.Age</div>
+                        }
+                    </div>
+
+                    <!-- Bottom-right: expansion pill + category -->
+                    <div class="bottom-right-labels">
+                        @if (game.Type?.ToString().Equals("Expansion", StringComparison.OrdinalIgnoreCase) == true)
+                        {
+                            <div class="category-label expansion-label">Expansion</div>
+                        }
+                        @if (!string.IsNullOrEmpty(game.Category))
+                        {
+                            <div class="category-label">@game.Category</div>
+                        }
+                    </div>
+
+                    <!-- Selected checkmark -->
+                    <div class="selected-indicator">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+
+                    @if (isUnavailable)
+                    {
+                        <div class="unavailable-banner">Unavailable</div>
+                    }
+                </div>
+
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="card-title-wrap">
+                        <h3 class="card-title">@game.TabletopGame</h3>
+                    </div>
+                    <div class="card-divider"></div>
+
+                    <div class="card-info">
+                        <div class="info-row">
+                            <span class="material-symbols-rounded info-icon" style="color:#7986cb">group</span>
+                            <span class="value">@game.PlayerCount</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="material-symbols-rounded info-icon" style="color:#ff8a65">schedule</span>
+                            <span class="value">@game.AvgPlaytime</span>
+                        </div>
+
+                        <div class="info-row info-row-right">
+                            <a class="bgg-score" href="@game.URL" target="_blank" rel="noopener noreferrer"
+                                title="View on BoardGameGeek" onclick="event.stopPropagation()">
+                                <img src="~/images/bgg.svg" alt="BGG" class="bgg-icon">
+                                @game.BGGScore
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<!-- ── Floating Action Buttons ── -->
+<button class="fab fab-right" data-bs-toggle="modal" data-bs-target="#contactModal" title="Contact Us">
+    <span class="material-symbols-rounded">mail</span>
+</button>
+
+<button class="fab fab-left" id="sortFilterBtn" title="Sort &amp; Filter">
+    <span class="material-symbols-rounded">tune</span>
+</button>
+
+<!-- Sort & Filter Panel -->
+<div class="sf-panel" id="sfPanel" aria-hidden="true">
+    <div class="sf-panel-inner">
+
+        <div class="sf-section">
+            <p class="sf-section-label">Sort by</p>
+            <div class="sf-sort-group" id="sortGroup">
+                <button class="sf-sort-btn active" data-sort="name">Name</button>
+                <button class="sf-sort-btn" data-sort="bgg">BGG Score</button>
+                <button class="sf-sort-btn" data-sort="complexity">Complexity</button>
+                <button class="sf-sort-btn" data-sort="playtime">Playtime</button>
+                <button class="sf-sort-btn" data-sort="players">Players</button>
+            </div>
+        </div>
+
+        <div class="sf-divider"></div>
+
+        <div class="sf-section">
+            <p class="sf-section-label">Search</p>
+            <div class="sf-search-wrap">
+                <span class="material-symbols-rounded sf-search-icon">search</span>
+                <input type="text" id="sfSearchInput" class="sf-search-input" placeholder="Search by name…">
+            </div>
+        </div>
+
+        <div class="sf-divider"></div>
+
+        <div class="sf-section">
+            <div class="sf-filter-header">
+                <p class="sf-section-label">Filter</p>
+                <button class="sf-clear-btn" id="clearFiltersBtn">Clear all</button>
+            </div>
+
+            <p class="sf-group-label">Category</p>
+            <div class="sf-badge-group" id="filterCategory" data-filter="category"></div>
+
+            <p class="sf-group-label">Theme</p>
+            <div class="sf-badge-group" id="filterTheme" data-filter="theme"></div>
+
+            <p class="sf-group-label">Tier</p>
+            <div class="sf-badge-group" id="filterTier" data-filter="tier"></div>
+
+            <p class="sf-group-label">Type</p>
+            <div class="sf-badge-group" id="filterType" data-filter="type"></div>
+
+            <p class="sf-group-label">Complexity</p>
+            <div class="sf-badge-group" id="filterComplexity" data-filter="complexity"></div>
+
+            <p class="sf-group-label">Availability</p>
+            <div class="sf-badge-group" id="filterAvailability" data-filter="availability"></div>
+        </div>
+
+    </div>
+</div>
+<div class="sf-backdrop" id="sfBackdrop"></div>
+
+
+<!-- Contact Form Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel">Contact Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name *</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number *</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address (Optional)</label>
+                        <textarea class="form-control" id="address" rows="3"></textarea>
+                    </div>
+                    <div id="selectedGamesDisplay" class="mb-3">
+                        <strong>Selected Games:</strong>
+                        <ul id="selectedGamesList"></ul>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

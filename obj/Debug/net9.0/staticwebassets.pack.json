@@ -1,0 +1,305 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\bgg.svg",
+      "PackagePath": "staticwebassets\\images\\bgg.svg"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\7-wonders-duel.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\7-wonders-duel.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\a-game-of-thrones-the-board-game-second-edition.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\a-game-of-thrones-the-board-game-second-edition.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\aeon-trespass-odyssey.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\aeon-trespass-odyssey.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\alhambra.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\alhambra.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\ark-nova.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\ark-nova.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\arkham-horror-the-card-game-carnevale-of-horrors-s.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\arkham-horror-the-card-game-carnevale-of-horrors-s.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\arkham-horror-the-card-game.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\arkham-horror-the-card-game.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\bang-the-dice-game-old-saloon.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\bang-the-dice-game-old-saloon.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\bang-the-dice-game.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\bang-the-dice-game.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\brass-birmingham.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\brass-birmingham.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\ca-dollar-h-n-guns-second-edition-more-ca-dollar-h.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\ca-dollar-h-n-guns-second-edition-more-ca-dollar-h.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\ca-dollar-h-n-guns-second-edition-team-spirit.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\ca-dollar-h-n-guns-second-edition-team-spirit.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\ca-dollar-h-n-guns-second-edition.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\ca-dollar-h-n-guns-second-edition.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\carcassonne.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\carcassonne.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\catan-seafarers.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\catan-seafarers.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\catan.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\catan.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\clank-catacombs.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\clank-catacombs.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\colt-express.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\colt-express.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\coup.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\coup.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\cyclades-legendary-edition.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\cyclades-legendary-edition.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dead-of-winter-a-crossroads-game.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dead-of-winter-a-crossroads-game.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dead-of-winter-the-long-night.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dead-of-winter-the-long-night.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dixit-odyssey.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dixit-odyssey.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dominion.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dominion.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dune-imperium.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dune-imperium.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dungeon-masters-guide-d-and-d-5e.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dungeon-masters-guide-d-and-d-5e.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dungeons-and-dragons-onslaught-expansion-red-wizar.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dungeons-and-dragons-onslaught-expansion-red-wizar.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\dungeons-and-dragons-onslaught.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\dungeons-and-dragons-onslaught.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\eclipse-new-dawn-for-the-galaxy.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\eclipse-new-dawn-for-the-galaxy.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\everdell.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\everdell.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\frosthaven.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\frosthaven.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\ghost-stories-black-secret.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\ghost-stories-black-secret.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\ghost-stories-white-moon.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\ghost-stories-white-moon.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\ghost-stories.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\ghost-stories.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\gloomhaven.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\gloomhaven.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heat-heavy-rain.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heat-heavy-rain.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heat-pedal-to-the-metal.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heat-pedal-to-the-metal.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-mercenaries-expansion-p.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-mercenaries-expansion-p.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-mercenaries-expansion-p2.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-mercenaries-expansion-p2.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-mercenaries-expansion-p3.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-mercenaries-expansion-p3.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-nomads-mini-expansion.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-nomads-mini-expansion.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-order-and-chaos.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-order-and-chaos.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-pestilence-booster-pack.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-pestilence-booster-pack.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-pestilence.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-pestilence.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea-siege-engines-mini-expa.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea-siege-engines-mini-expa.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\heroes-of-land-air-and-sea.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\heroes-of-land-air-and-sea.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\jamaica.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\jamaica.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\level-7-omega-protocol.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\level-7-omega-protocol.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\llamas-unleashed.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\llamas-unleashed.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\marvel-dice-masters-uncanny-x-men.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\marvel-dice-masters-uncanny-x-men.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\monster-manual-d-and-d-5e.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\monster-manual-d-and-d-5e.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\oh-my-goods-longsdale-in-revolt.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\oh-my-goods-longsdale-in-revolt.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\oh-my-goods.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\oh-my-goods.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\pandemic.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\pandemic.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\players-handbook-d-and-d-5e.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\players-handbook-d-and-d-5e.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\power-grid.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\power-grid.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\risk.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\risk.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\shadows-over-camelot.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\shadows-over-camelot.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\sushi-go-party.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\sushi-go-party.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\tiny-epic-dungeons-stories.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\tiny-epic-dungeons-stories.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\tiny-epic-dungeons.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\tiny-epic-dungeons.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\twilight-struggle.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\twilight-struggle.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\covers\\wingspan.webp",
+      "PackagePath": "staticwebassets\\images\\covers\\wingspan.webp"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\logo.jpg",
+      "PackagePath": "staticwebassets\\images\\logo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\images\\placeholder.svg",
+      "PackagePath": "staticwebassets\\images\\placeholder.svg"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\js\\bgg-tooltip.js",
+      "PackagePath": "staticwebassets\\js\\bgg-tooltip.js"
+    },
+    {
+      "Id": "C:\\Users\\paulo\\projects\\GameLibrary\\GameLibrary\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.GameLibrary.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.GameLibrary.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.GameLibrary.props",
+      "PackagePath": "build\\GameLibrary.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.GameLibrary.props",
+      "PackagePath": "buildMultiTargeting\\GameLibrary.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.GameLibrary.props",
+      "PackagePath": "buildTransitive\\GameLibrary.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
