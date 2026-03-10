@@ -1,0 +1,71 @@
+﻿@model Dictionary<string, List<GameLibrary.Models.RentalRecord>>
+@{
+    ViewData["Title"] = "Rental History";
+}
+
+<div class="rental-history-container">
+    <h2 class="history-heading">Rental History</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="history-empty">
+            <span class="material-symbols-rounded">inventory_2</span>
+            <p>No rental records yet.</p>
+        </div>
+    }
+    else
+    {
+        @foreach (var group in Model.OrderBy(g => g.Key))
+        {
+            var openCount = group.Value.Count(r => r.IsOpen);
+
+            <div class="history-game-section">
+                <div class="history-game-header">
+                    <span class="history-game-name">@group.Key</span>
+                    <span class="history-rental-count">@group.Value.Count rental@(group.Value.Count != 1 ? "s" : "")</span>
+                    @if (openCount > 0)
+                    {
+                        <span class="history-open-badge">Out</span>
+                    }
+                </div>
+
+                <div class="history-table-wrap">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Renter</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Received</th>
+                                <th>Phone</th>
+                                <th>Recorded</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var record in group.Value)
+                            {
+                                <tr class="@(record.IsOpen ? "row-open" : "")">
+                                    <td>@record.Renter</td>
+                                    <td>@record.StartDate</td>
+                                    <td>@record.EndDate</td>
+                                    <td>
+                                        @if (record.IsOpen)
+                                        {
+                                            <span class="still-out">Still out</span>
+                                        }
+                                        else
+                                        {
+                                            @record.ReceivedDate
+                                        }
+                                    </td>
+                                    <td>@record.PhoneNumber</td>
+                                    <td class="recorded-at">@record.RecordedAt</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    }
+</div>

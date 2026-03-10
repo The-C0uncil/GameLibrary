@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b141335d-1671-4d93-ad57-eea1e2707291</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,10 +19,12 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Middleware\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Views\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Login\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\covers\" />

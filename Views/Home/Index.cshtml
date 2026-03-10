@@ -1,4 +1,9 @@
 ﻿@model List<GameLibrary.Models.Game>
+@{
+    Dictionary<string, (string Renter, string StartDate, string EndDate)>? openRentals = 
+        ViewBag.OpenRentals as Dictionary<string, (string Renter, string StartDate, string EndDate)>
+            ?? new Dictionary<string, (string, string, string)>();
+}
 
 <div class="games-grid-container">
     <div class="games-grid" id="gamesGrid">
@@ -6,6 +11,7 @@
         {
             var isUnavailable = !game.Availability;
             var cardClass = "game-card" + (isUnavailable ? " unavailable" : "");
+            openRentals.TryGetValue(game.TabletopGame, out var rental);
 
             <div class="@cardClass"
                 data-game-name="@game.TabletopGame"
@@ -64,6 +70,17 @@
 
                     @if (isUnavailable)
                     {
+                        <!-- Renter info banner (above unavailable) -->
+                        @if (!string.IsNullOrEmpty(rental.Renter))
+                        {
+                            <div class="renter-banner">
+                                <span class="material-symbols-rounded renter-icon">person</span>
+                                <span class="renter-text">
+                                    @rental.Renter
+                                    <span class="renter-dates">@rental.StartDate – @rental.EndDate</span>
+                                </span>
+                            </div>
+                        }
                         <div class="unavailable-banner">Unavailable</div>
                     }
                 </div>
@@ -102,8 +119,13 @@
 
 
 <!-- ── Floating Action Buttons ── -->
-<button class="fab fab-right" data-bs-toggle="modal" data-bs-target="#contactModal" title="Contact Us">
+{{!-- Contact FAB (hidden for now, easy to re-enable) --}}
+<button class="fab fab-right fab-contact d-none" data-bs-toggle="modal" data-bs-target="#contactModal" title="Contact Us">
     <span class="material-symbols-rounded">mail</span>
+</button>
+
+<button class="fab fab-right fab-rent" data-bs-toggle="modal" data-bs-target="#rentModal" title="Register Rental">
+    <span class="material-symbols-rounded">handshake</span>
 </button>
 
 <button class="fab fab-left" id="sortFilterBtn" title="Sort &amp; Filter">
@@ -167,6 +189,26 @@
 <div class="sf-backdrop" id="sfBackdrop"></div>
 
 
+<!-- Receive Game Confirmation Modal -->
+<div class="modal fade" id="receiveModal" tabindex="-1" aria-labelledby="receiveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title" id="receiveModalLabel">Mark as Returned?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-2">
+                <p class="mb-0">Mark <strong id="receiveGameName"></strong> as returned? Today's date will be recorded.</p>
+            </div>
+            <div class="modal-footer border-0 pt-1">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success btn-sm" id="confirmReceiveBtn">Yes, mark returned</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Contact Form Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -194,14 +236,54 @@
                         <textarea class="form-control" id="address" rows="3"></textarea>
                     </div>
                     <div id="selectedGamesDisplay" class="mb-3">
-                        <strong>Selected Games:</strong>
-                        <ul id="selectedGamesList"></ul>
+                        <p class="modal-games-label">Selected Games:</p>
+                        <div id="selectedGamesList" class="selected-chips"></div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rent Modal -->
+<div class="modal fade" id="rentModal" tabindex="-1" aria-labelledby="rentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rentModalLabel">Register Rental</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="rentForm">
+                    <div class="mb-3">
+                        <label for="renterName" class="form-label">Renter Name *</label>
+                        <input type="text" class="form-control" id="renterName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rentStartDate" class="form-label">Start Date *</label>
+                        <input type="date" class="form-control" id="rentStartDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rentEndDate" class="form-label">End Date *</label>
+                        <input type="date" class="form-control" id="rentEndDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="renterPhone" class="form-label">Phone Number (Optional)</label>
+                        <input type="tel" class="form-control" id="renterPhone">
+                    </div>
+                    <div id="rentSelectedGamesDisplay" class="mb-3">
+                        <p class="modal-games-label">Selected Games:</p>
+                        <div id="rentSelectedGamesList" class="selected-chips"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="submitRentBtn">Register</button>
             </div>
         </div>
     </div>
