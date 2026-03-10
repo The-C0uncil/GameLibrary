@@ -482,3 +482,10 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# ── Game Library runtime data ─────────────────────────────────────────────────
+wwwroot/images/covers/
+
+# CSV data files contain live rental and game data — do not commit them
+Data/game_list.csv
+Data/rentals.csv

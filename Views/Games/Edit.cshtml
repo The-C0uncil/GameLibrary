@@ -1,0 +1,27 @@
+﻿@model GameLibrary.Models.Game
+@{
+    ViewData["Title"] = "Edit Game";
+}
+
+<div class="mgmt-container">
+    <div class="mgmt-header">
+        <h2 class="mgmt-title">Edit — @Model.TabletopGame</h2>
+        <a href="/Games" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+            <span class="material-symbols-rounded" style="font-size:18px">arrow_back</span>
+            Back
+        </a>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="game-form">
+        @Html.AntiForgeryToken()
+        <!-- Preserve the original name so the controller can find the right row -->
+        <input type="hidden" name="originalName" value="@Model.TabletopGame">
+
+        @await Html.PartialAsync("_GameFormFields", Model)
+
+        <div class="form-actions">
+            <a href="/Games" class="btn btn-outline-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+</div>

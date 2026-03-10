@@ -1,8 +1,7 @@
 ﻿@model List<GameLibrary.Models.Game>
 @{
-    Dictionary<string, (string Renter, string StartDate, string EndDate)>? openRentals = 
-        ViewBag.OpenRentals as Dictionary<string, (string Renter, string StartDate, string EndDate)>
-            ?? new Dictionary<string, (string, string, string)>();
+    var openRentals = ViewBag.OpenRentals as Dictionary<string, (string Renter, string StartDate, string EndDate)>
+                      ?? new Dictionary<string, (string, string, string)>();
 }
 
 <div class="games-grid-container">
@@ -47,7 +46,7 @@
                         }
                         @if (!string.IsNullOrEmpty(game.Age?.ToString()))
                         {
-                            <div class="badge-circle badge-age" title="Minimum age">@game.Age</div>
+                            <div class="badge-circle badge-age" title="Minimum age">@game.Age+</div>
                         }
                     </div>
 
@@ -94,18 +93,18 @@
 
                     <div class="card-info">
                         <div class="info-row">
-                            <span class="material-symbols-rounded info-icon" style="color:#7986cb">group</span>
+                            <span class="material-symbols-rounded info-icon" style="color:#7eb8d4">group</span>
                             <span class="value">@game.PlayerCount</span>
                         </div>
 
                         <div class="info-row">
-                            <span class="material-symbols-rounded info-icon" style="color:#ff8a65">schedule</span>
+                            <span class="material-symbols-rounded info-icon" style="color:#e8b04b">schedule</span>
                             <span class="value">@game.AvgPlaytime</span>
                         </div>
 
                         <div class="info-row info-row-right">
                             <a class="bgg-score" href="@game.URL" target="_blank" rel="noopener noreferrer"
-                                title="View on BoardGameGeek" onclick="event.stopPropagation()">
+                               title="View on BoardGameGeek" onclick="event.stopPropagation()">
                                 <img src="~/images/bgg.svg" alt="BGG" class="bgg-icon">
                                 @game.BGGScore
                             </a>
@@ -119,7 +118,6 @@
 
 
 <!-- ── Floating Action Buttons ── -->
-{{!-- Contact FAB (hidden for now, easy to re-enable) --}}
 <button class="fab fab-right fab-contact d-none" data-bs-toggle="modal" data-bs-target="#contactModal" title="Contact Us">
     <span class="material-symbols-rounded">mail</span>
 </button>

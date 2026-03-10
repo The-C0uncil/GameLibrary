@@ -1,0 +1,128 @@
+﻿@model GameLibrary.Models.Game
+
+<div class="form-grid">
+
+    <div class="form-group">
+        <label class="form-label">Name</label>
+        <input type="text" name="game.TabletopGame" class="form-control" value="@Model.TabletopGame">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Category</label>
+        <input type="text" name="game.Category" class="form-control" value="@Model.Category">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Theme</label>
+        <input type="text" name="game.Theme" class="form-control" value="@Model.Theme">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Complexity</label>
+        <input type="text" name="game.Complexity" class="form-control" value="@Model.Complexity">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Price</label>
+        <input type="text" name="game.Price" class="form-control" value="@Model.Price">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Tier</label>
+        <input type="text" name="game.Tier" class="form-control" value="@Model.Tier">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Type</label>
+        <input type="text" name="game.Type" class="form-control" value="@Model.Type">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">BGG Score</label>
+        <input type="text" name="game.BGGScore" class="form-control" value="@Model.BGGScore">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Player Count</label>
+        <input type="text" name="game.PlayerCount" class="form-control" value="@Model.PlayerCount">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Age</label>
+        <input type="text" name="game.Age" class="form-control" value="@Model.Age">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Recommended Players</label>
+        <input type="text" name="game.RecommendedPlayers" class="form-control" value="@Model.RecommendedPlayers">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Avg. Playtime</label>
+        <input type="text" name="game.AvgPlaytime" class="form-control" value="@Model.AvgPlaytime">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">BGG URL</label>
+        <input type="url" name="game.URL" class="form-control" value="@Model.URL">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Missing Parts</label>
+        <input type="text" name="game.MissingParts" class="form-control" value="@Model.MissingParts">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Available</label>
+        <div class="form-check mt-1">
+            <input type="checkbox" name="game.Availability" class="form-check-input" id="availCheck"
+                   value="true" @(Model.Availability ? "checked" : "")>
+            <input type="hidden" name="game.Availability" value="false">
+            <label class="form-check-label" for="availCheck">Game is available to rent</label>
+        </div>
+    </div>
+
+    <!-- Cover image — full width row -->
+    <div class="form-group form-group-full">
+        <label class="form-label">Cover Image</label>
+        <div class="cover-upload-wrap">
+            @if (!string.IsNullOrEmpty(Model.Cover))
+            {
+                <img src="~/images/covers/@(Model.Cover).webp"
+                     onerror="this.src='/images/placeholder.svg'"
+                     alt="Current cover" class="cover-preview" id="coverPreview">
+            }
+            else
+            {
+                <img src="~/images/placeholder.svg" alt="No cover"
+                     class="cover-preview" id="coverPreview">
+            }
+            <div class="cover-upload-right">
+                <input type="file" name="coverImage" id="coverImageInput"
+                       class="form-control" accept="image/*"
+                       onchange="previewCover(this)">
+                <p class="cover-hint">
+                    Upload a new image to replace the current cover.
+                    The filename will be derived from the game name automatically,
+                    or you can set it manually below.
+                </p>
+                <div class="mt-2">
+                    <label class="form-label">Cover filename (without extension)</label>
+                    <input type="text" name="game.Cover" class="form-control"
+                           value="@Model.Cover" placeholder="leave blank to auto-generate">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function previewCover(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => document.getElementById('coverPreview').src = e.target.result;
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

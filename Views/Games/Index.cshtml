@@ -1,0 +1,110 @@
+﻿@model List<GameLibrary.Models.Game>
+@{
+    ViewData["Title"] = "Manage Games";
+}
+
+<div class="mgmt-container">
+    <div class="mgmt-header">
+        <h2 class="mgmt-title">Manage Games</h2>
+        <a href="/Games/Create" class="btn btn-primary btn-sm d-flex align-items-center gap-1">
+            <span class="material-symbols-rounded" style="font-size:18px">add</span>
+            New Game
+        </a>
+    </div>
+
+    <div class="mgmt-table-wrap">
+        <table class="mgmt-table">
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Tier</th>
+                    <th>Availability</th>
+                    <th class="actions-col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var game in Model)
+                {
+                    <tr>
+                        <td class="cover-col">
+                            @if (!string.IsNullOrEmpty(game.Cover))
+                            {
+                                <img src="~/images/covers/@(game.Cover).webp"
+                                    onerror="this.src='/images/placeholder.svg'"
+                                    alt="@game.TabletopGame" class="mgmt-cover">
+                            }
+                            else
+                            {
+                                <img src="~/images/placeholder.svg" alt="No cover" class="mgmt-cover">
+                            }
+                        </td>
+                        <td class="name-col">@game.TabletopGame</td>
+                        <td>@game.Category</td>
+                        <td>@game.Type</td>
+                        <td>@game.Tier</td>
+                        <td>
+                            @if (game.Availability)
+                            {
+                                <span class="avail-badge avail-yes">Available</span>
+                            }
+                            else
+                            {
+                                <span class="avail-badge avail-no">Out</span>
+                            }
+                        </td>
+                        <td class="actions-col">
+                            <a href="/Games/Edit?name=@Uri.EscapeDataString(game.TabletopGame)"
+                               class="mgmt-btn mgmt-btn-edit" title="Edit">
+                                <span class="material-symbols-rounded">edit</span>
+                            </a>
+                            <!-- Delete triggers confirmation modal -->
+                            <button type="button"
+                                    class="mgmt-btn mgmt-btn-delete"
+                                    title="Delete"
+                                    data-game-name="@game.TabletopGame"
+                                    onclick="confirmDelete(this)">
+                                <span class="material-symbols-rounded">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title">Delete Game?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body pt-2">
+                <p class="mb-0">Are you sure you want to delete <strong id="deleteGameName"></strong>? This cannot be undone.</p>
+            </div>
+            <div class="modal-footer border-0 pt-1">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="name" id="deleteGameInput">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(btn) {
+        const name = btn.getAttribute('data-game-name');
+        document.getElementById('deleteGameName').textContent = name;
+        document.getElementById('deleteGameInput').value = name;
+        document.getElementById('deleteForm').action = '/Games/Delete';
+        new bootstrap.Modal(document.getElementById('deleteModal')).show();
+    }
+</script>

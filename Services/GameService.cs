@@ -44,20 +44,12 @@ public class GameService
     /// </summary>
     public bool SetGameAvailability(string gameName, bool available)
     {
-        if (!File.Exists(_gameListPath)) return false;
-
         var games = GetAllGames();
         var game = games.FirstOrDefault(g =>
             string.Equals(g.TabletopGame, gameName, StringComparison.OrdinalIgnoreCase));
-
         if (game == null) return false;
         game.Availability = available;
-
-        using var writer = new StreamWriter(_gameListPath, append: false, System.Text.Encoding.UTF8);
-        using var csv = new CsvWriter(writer, CsvConfig);
-        csv.Context.RegisterClassMap<GameMap>();
-        csv.WriteRecords(games);
-
+        WriteAllGames(games);
         return true;
     }
 
@@ -236,6 +228,59 @@ public class GameService
 
         fields.Add(current.ToString());
         return fields.ToArray();
+    }
+
+    /// <summary>
+    /// Appends a new game row to game_list.csv.
+    /// </summary>
+    public void AddGame(Game game)
+    {
+        var games = GetAllGames();
+        games.Add(game);
+        WriteAllGames(games);
+    }
+
+    /// <summary>
+    /// Replaces the game matching originalName with the updated game object.
+    /// </summary>
+    public bool UpdateGame(string originalName, Game updated)
+    {
+        var games = GetAllGames();
+        var index = games.FindIndex(g =>
+            string.Equals(g.TabletopGame, originalName, StringComparison.OrdinalIgnoreCase));
+
+        if (index < 0) return false;
+
+        games[index] = updated;
+        WriteAllGames(games);
+        return true;
+    }
+
+    /// <summary>
+    /// Removes the game matching the given name from game_list.csv.
+    /// </summary>
+    public bool DeleteGame(string name)
+    {
+        var games = GetAllGames();
+        var removed = games.RemoveAll(g =>
+            string.Equals(g.TabletopGame, name, StringComparison.OrdinalIgnoreCase));
+
+        if (removed == 0) return false;
+
+        WriteAllGames(games);
+        return true;
+    }
+
+    /// <summary>
+    /// Shared write helper — all mutations go through here so CsvHelper
+    /// config and class map are applied consistently every time.
+    /// </summary>
+    private void WriteAllGames(List<Game> games)
+    {
+        using var writer = new StreamWriter(_gameListPath, append: false, System.Text.Encoding.UTF8);
+        using var csv = new CsvWriter(writer, CsvConfig);
+        csv.Context.RegisterClassMap<GameMap>();
+        csv.WriteRecords(games);
     }
 }
 
