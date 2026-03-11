@@ -21,7 +21,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Middleware\" />
     <Folder Include="Models\" />
-    <Folder Include="Services\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Shared\" />

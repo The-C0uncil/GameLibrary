@@ -2,5 +2,5 @@ namespace GameLibrary.Models;
 
 public class ReceiveGameRequest
 {
-    public string GameName { get; set; } = "";
+    public int GameId { get; set; }
 }

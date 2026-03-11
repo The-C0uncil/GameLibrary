@@ -1,3 +1,4 @@
+using GameLibrary.BackgroundServices;
 using GameLibrary.Middleware;
 using GameLibrary.Services;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<GameService>();
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddHostedService<OverdueCheckService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

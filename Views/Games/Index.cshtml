@@ -1,6 +1,7 @@
 ﻿@model List<GameLibrary.Models.Game>
 @{
     ViewData["Title"] = "Manage Games";
+    var sorted = Model.OrderBy(g => g.TabletopGame).ToList();
 }
 
 <div class="mgmt-container">
@@ -12,40 +13,46 @@
         </a>
     </div>
 
+    <!-- Search -->
+    <div class="mgmt-search-wrap mb-3">
+        <span class="material-symbols-rounded mgmt-search-icon">search</span>
+        <input type="text" id="mgmtSearch" class="mgmt-search-input" placeholder="Search by name…" oninput="filterTable()">
+    </div>
+
     <div class="mgmt-table-wrap">
-        <table class="mgmt-table">
+        <table class="mgmt-table" id="mgmtTable">
             <thead>
                 <tr>
-                    <th>Cover</th>
                     <th>Name</th>
-                    <th>Category</th>
-                    <th>Type</th>
-                    <th>Tier</th>
                     <th>Availability</th>
                     <th class="actions-col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var game in Model)
+            <tbody id="mgmtTableBody">
+                @foreach (var game in sorted)
                 {
-                    <tr>
-                        <td class="cover-col">
-                            @if (!string.IsNullOrEmpty(game.Cover))
-                            {
-                                <img src="~/images/covers/@(game.Cover).webp"
-                                    onerror="this.src='/images/placeholder.svg'"
-                                    alt="@game.TabletopGame" class="mgmt-cover">
-                            }
-                            else
-                            {
-                                <img src="~/images/placeholder.svg" alt="No cover" class="mgmt-cover">
-                            }
-                        </td>
+                    <tr class="mgmt-row"
+                        data-name="@game.TabletopGame.ToLower()"
+                        onclick="showGameInfo(this)"
+                        data-id="@game.Id"
+                        data-cover="@game.Cover"
+                        data-tabletop-game="@game.TabletopGame"
+                        data-category="@game.Category"
+                        data-theme="@game.Theme"
+                        data-complexity="@game.Complexity"
+                        data-price="@game.Price"
+                        data-tier="@game.Tier"
+                        data-type="@game.Type"
+                        data-bgg-score="@game.BGGScore"
+                        data-player-count="@game.PlayerCount"
+                        data-age="@game.Age"
+                        data-recommended-players="@game.RecommendedPlayers"
+                        data-avg-playtime="@game.AvgPlaytime"
+                        data-availability="@game.Availability.ToString().ToLower()"
+                        data-missing-parts="@game.MissingParts"
+                        data-url="@game.URL">
                         <td class="name-col">@game.TabletopGame</td>
-                        <td>@game.Category</td>
-                        <td>@game.Type</td>
-                        <td>@game.Tier</td>
-                        <td>
+                        <td onclick="event.stopPropagation()">
                             @if (game.Availability)
                             {
                                 <span class="avail-badge avail-yes">Available</span>
@@ -55,12 +62,11 @@
                                 <span class="avail-badge avail-no">Out</span>
                             }
                         </td>
-                        <td class="actions-col">
+                        <td class="actions-col" onclick="event.stopPropagation()">
                             <a href="/Games/Edit?name=@Uri.EscapeDataString(game.TabletopGame)"
                                class="mgmt-btn mgmt-btn-edit" title="Edit">
                                 <span class="material-symbols-rounded">edit</span>
                             </a>
-                            <!-- Delete triggers confirmation modal -->
                             <button type="button"
                                     class="mgmt-btn mgmt-btn-delete"
                                     title="Delete"
@@ -73,6 +79,26 @@
                 }
             </tbody>
         </table>
+    </div>
+    <div class="pagination-wrap" id="mgmtPagination"></div>
+</div>
+
+<!-- Game Info Modal -->
+<div class="modal fade" id="gameInfoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title" id="infoGameTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="game-info-cover-row">
+                    <img id="infoGameCover" src="" alt="" class="game-info-cover">
+                    <div class="game-info-badges" id="infoGameBadges"></div>
+                </div>
+                <div class="game-info-grid" id="infoGameGrid"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -100,11 +126,121 @@
 </div>
 
 <script>
-    function confirmDelete(btn) {
+document.addEventListener('DOMContentLoaded', function () {
+    const MGMT_PAGE_SIZE = 20;
+    let mgmtPage = 1;
+    const allRows = Array.from(document.querySelectorAll('.mgmt-row'));
+
+    // ── Search + filter ────────────────────────
+    window.filterTable = function () {
+        mgmtPage = 1;
+        renderMgmtPage();
+    };
+
+    function renderMgmtPage() {
+        const term     = document.getElementById('mgmtSearch').value.toLowerCase();
+        const filtered = allRows.filter(row => row.dataset.name.includes(term));
+
+        allRows.forEach(row => row.style.display = 'none');
+        const start = (mgmtPage - 1) * MGMT_PAGE_SIZE;
+        filtered.slice(start, start + MGMT_PAGE_SIZE).forEach(row => row.style.display = '');
+        renderMgmtPagination(filtered.length);
+    }
+
+    function renderMgmtPagination(total) {
+        const wrap       = document.getElementById('mgmtPagination');
+        const totalPages = Math.ceil(total / MGMT_PAGE_SIZE);
+        wrap.innerHTML   = '';
+        if (totalPages <= 1) return;
+
+        const prev = document.createElement('button');
+        prev.className = 'page-btn';
+        prev.innerHTML = '<span class="material-symbols-rounded">chevron_left</span>';
+        prev.disabled  = mgmtPage === 1;
+        prev.onclick   = () => { mgmtPage--; renderMgmtPage(); };
+        wrap.appendChild(prev);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.className   = 'page-btn' + (i === mgmtPage ? ' active' : '');
+            btn.textContent = i;
+            btn.onclick     = () => { mgmtPage = i; renderMgmtPage(); };
+            wrap.appendChild(btn);
+        }
+
+        const next = document.createElement('button');
+        next.className = 'page-btn';
+        next.innerHTML = '<span class="material-symbols-rounded">chevron_right</span>';
+        next.disabled  = mgmtPage === totalPages;
+        next.onclick   = () => { mgmtPage++; renderMgmtPage(); };
+        wrap.appendChild(next);
+    }
+
+    renderMgmtPage();
+
+    // ── Game info modal — lazy init to avoid Bootstrap timing issue ──
+    let infoModal = null;
+    function getInfoModal() {
+        if (!infoModal) infoModal = new bootstrap.Modal(document.getElementById('gameInfoModal'));
+        return infoModal;
+    }
+
+    window.showGameInfo = function (row) {
+        const d = row.dataset;
+        document.getElementById('infoGameTitle').textContent = d.tabletopGame;
+
+        const cover = document.getElementById('infoGameCover');
+        cover.src     = d.cover ? `/images/covers/${d.cover}.webp` : '/images/placeholder.svg';
+        cover.onerror = () => { cover.src = '/images/placeholder.svg'; };
+
+        const badges = document.getElementById('infoGameBadges');
+        badges.innerHTML = d.availability === 'true'
+            ? '<span class="avail-badge avail-yes">Available</span>'
+            : '<span class="avail-badge avail-no">Out</span>';
+
+        const fields = [
+            ['Category',      d.category],
+            ['Theme',         d.theme],
+            ['Complexity',    d.complexity],
+            ['Type',          d.type],
+            ['Tier',          d.tier],
+            ['Price',         d.price],
+            ['Players',       d.playerCount],
+            ['Rec. Players',  d.recommendedPlayers],
+            ['Age',           d.age ? d.age + '+' : ''],
+            ['Playtime',      d.avgPlaytime],
+            ['BGG Score',     d.bggScore],
+            ['Missing Parts', d.missingParts],
+        ];
+
+        const grid = document.getElementById('infoGameGrid');
+        grid.innerHTML = fields
+            .filter(([, v]) => v && v.trim())
+            .map(([label, value]) => `
+                <div class="info-field">
+                    <span class="info-field-label">${label}</span>
+                    <span class="info-field-value">${value}</span>
+                </div>`)
+            .join('');
+
+        if (d.url) {
+            grid.innerHTML += `
+                <div class="info-field info-field-full">
+                    <span class="info-field-label">BGG Link</span>
+                    <a href="${d.url}" target="_blank" rel="noopener noreferrer" class="info-field-link">${d.url}</a>
+                </div>`;
+        }
+
+        getInfoModal().show();
+    };
+
+    // ── Delete ──────────────────────────────────
+    window.confirmDelete = function (btn) {
         const name = btn.getAttribute('data-game-name');
         document.getElementById('deleteGameName').textContent = name;
-        document.getElementById('deleteGameInput').value = name;
-        document.getElementById('deleteForm').action = '/Games/Delete';
+        document.getElementById('deleteGameInput').value      = name;
+        document.getElementById('deleteForm').action          = '/Games/Delete';
         new bootstrap.Modal(document.getElementById('deleteModal')).show();
-    }
+    };
+});
 </script>

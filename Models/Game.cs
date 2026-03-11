@@ -1,9 +1,8 @@
-using System;
-
 namespace GameLibrary.Models;
 
 public class Game
 {
+    public int Id { get; set; }
     public string Cover { get; set; } = string.Empty;
     public string TabletopGame { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;

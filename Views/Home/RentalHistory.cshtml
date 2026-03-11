@@ -1,10 +1,26 @@
-﻿@model Dictionary<string, List<GameLibrary.Models.RentalRecord>>
+﻿@model List<GameLibrary.Models.RentalRecord>
 @{
     ViewData["Title"] = "Rental History";
+    // OrderGameNames is Dictionary<int, List<string>> — order ID → list of game names
+    var orderGameNames = ViewBag.OrderGameNames as Dictionary<int, List<string>>
+                         ?? new Dictionary<int, List<string>>();
+
+    // For the game filter dropdown: collect all unique names across all orders
+    var allGameNames = orderGameNames.Values
+        .SelectMany(names => names)
+        .Distinct()
+        .OrderBy(n => n)
+        .ToList();
+
+    var clients = Model.Select(r => r.Renter).Where(r => !string.IsNullOrEmpty(r))
+                       .Distinct().OrderBy(r => r).ToList();
 }
 
 <div class="rental-history-container">
-    <h2 class="history-heading">Rental History</h2>
+    <div class="mgmt-header">
+        <h2 class="history-heading">Rental History</h2>
+        <span style="color:var(--text-muted);font-size:0.85rem">@Model.Count order@(Model.Count != 1 ? "s" : "")</span>
+    </div>
 
     @if (!Model.Any())
     {
@@ -15,57 +31,192 @@
     }
     else
     {
-        @foreach (var group in Model.OrderBy(g => g.Key))
-        {
-            var openCount = group.Value.Count(r => r.IsOpen);
-
-            <div class="history-game-section">
-                <div class="history-game-header">
-                    <span class="history-game-name">@group.Key</span>
-                    <span class="history-rental-count">@group.Value.Count rental@(group.Value.Count != 1 ? "s" : "")</span>
-                    @if (openCount > 0)
-                    {
-                        <span class="history-open-badge">Out</span>
-                    }
-                </div>
-
-                <div class="history-table-wrap">
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Renter</th>
-                                <th>Start</th>
-                                <th>End</th>
-                                <th>Received</th>
-                                <th>Phone</th>
-                                <th>Recorded</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var record in group.Value)
-                            {
-                                <tr class="@(record.IsOpen ? "row-open" : "")">
-                                    <td>@record.Renter</td>
-                                    <td>@record.StartDate</td>
-                                    <td>@record.EndDate</td>
-                                    <td>
-                                        @if (record.IsOpen)
-                                        {
-                                            <span class="still-out">Still out</span>
-                                        }
-                                        else
-                                        {
-                                            @record.ReceivedDate
-                                        }
-                                    </td>
-                                    <td>@record.PhoneNumber</td>
-                                    <td class="recorded-at">@record.RecordedAt</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+        <!-- Filters -->
+        <div class="history-filters">
+            <div class="history-filter-group">
+                <label class="sf-section-label" for="clientSearch">Client</label>
+                <div class="autocomplete-wrap">
+                    <input type="text" id="clientSearch" class="mgmt-search-input"
+                           placeholder="All clients…" autocomplete="off" style="width:100%">
+                    <ul class="autocomplete-dropdown" id="clientDropdown">
+                        <li data-value="">All clients</li>
+                        @foreach (var client in clients)
+                        {
+                            <li data-value="@client">@client</li>
+                        }
+                    </ul>
                 </div>
             </div>
-        }
+            <div class="history-filter-group">
+                <label class="sf-section-label" for="gameSearch">Game</label>
+                <div class="autocomplete-wrap">
+                    <input type="text" id="gameSearch" class="mgmt-search-input"
+                           placeholder="All games…" autocomplete="off" style="width:100%">
+                    <ul class="autocomplete-dropdown" id="gameDropdown">
+                        <li data-value="" data-label="All games">All games</li>
+                        @foreach (var gname in allGameNames)
+                        {
+                            <li data-value="@gname" data-label="@gname">@gname</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <button class="sf-clear-btn" id="clearHistoryBtn">Clear</button>
+        </div>
+
+        <!-- Orders — server rendered, filtered/paged by JS -->
+        <div id="orderList">
+            @foreach (var o in Model)
+            {
+                var names       = orderGameNames.TryGetValue(o.Id, out var nl) ? nl : new List<string>();
+                var namesCsv    = string.Join("|", names).ToLower();
+                var statusClass = o.IsOverdue ? "badge-overdue" : (o.IsOpen ? "badge-open" : "badge-closed");
+                var statusLabel = o.IsOverdue ? "Overdue"       : (o.IsOpen ? "Out"        : "Returned");
+
+                <div class="history-order-card"
+                     data-renter="@o.Renter.ToLower()"
+                     data-game-names="@namesCsv">
+
+                    <div class="history-order-header">
+                        <span class="history-order-id">#@o.Id</span>
+                        <span class="history-order-renter">@o.Renter</span>
+                        @if (!string.IsNullOrEmpty(o.PhoneNumber))
+                        {
+                            <span class="history-order-phone">@o.PhoneNumber</span>
+                        }
+                        <span class="ms-auto d-flex align-items-center gap-2">
+                            <span class="history-status-badge @statusClass">@statusLabel</span>
+                        </span>
+                    </div>
+
+                    <div class="history-order-body">
+                        <div class="history-order-dates">
+                            <span class="material-symbols-rounded" style="font-size:16px;color:var(--text-muted)">schedule</span>
+                            @o.StartDate → @o.EndDate
+                            @if (!string.IsNullOrEmpty(o.ReceivedDate))
+                            {
+                                <span class="history-received-date">&nbsp;· Returned @o.ReceivedDate</span>
+                            }
+                        </div>
+                        <div class="history-order-games">
+                            @foreach (var name in names)
+                            {
+                                <span class="history-game-chip">@name</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="history-order-footer">
+                        <span class="recorded-at">Recorded @o.RecordedAt</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="pagination-wrap" id="historyPagination"></div>
     }
 </div>
+
+@if (Model.Any())
+{
+    <script>
+        const HISTORY_PAGE_SIZE = 15;
+        let historyPage  = 1;
+        let activeClient = '';
+        let activeGameId = '';
+
+        const allCards = Array.from(document.querySelectorAll('#orderList .history-order-card'));
+
+        function applyHistory() {
+            const filtered = allCards.filter(card => {
+                const clientOk = !activeClient ||
+                    card.dataset.renter === activeClient.toLowerCase();
+                const gameOk = !activeGameId ||
+                    card.dataset.gameNames.split('|').includes(activeGameId.toLowerCase());
+                return clientOk && gameOk;
+            });
+
+            allCards.forEach(c => c.style.display = 'none');
+            const start = (historyPage - 1) * HISTORY_PAGE_SIZE;
+            filtered.slice(start, start + HISTORY_PAGE_SIZE)
+                    .forEach(c => c.style.display = '');
+
+            renderHistoryPagination(filtered.length);
+        }
+
+        function renderHistoryPagination(total) {
+            const wrap       = document.getElementById('historyPagination');
+            const totalPages = Math.ceil(total / HISTORY_PAGE_SIZE);
+            wrap.innerHTML   = '';
+            if (totalPages <= 1) return;
+
+            const prev = document.createElement('button');
+            prev.className = 'page-btn';
+            prev.innerHTML = '<span class="material-symbols-rounded">chevron_left</span>';
+            prev.disabled  = historyPage === 1;
+            prev.onclick   = () => { historyPage--; applyHistory(); };
+            wrap.appendChild(prev);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className   = 'page-btn' + (i === historyPage ? ' active' : '');
+                btn.textContent = i;
+                btn.onclick     = () => { historyPage = i; applyHistory(); };
+                wrap.appendChild(btn);
+            }
+
+            const next = document.createElement('button');
+            next.className = 'page-btn';
+            next.innerHTML = '<span class="material-symbols-rounded">chevron_right</span>';
+            next.disabled  = historyPage === totalPages;
+            next.onclick   = () => { historyPage++; applyHistory(); };
+            wrap.appendChild(next);
+        }
+
+        // ── Autocomplete ──────────────────────────
+        function setupAutocomplete(inputId, dropdownId, onSelect) {
+            const input    = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            const items    = Array.from(dropdown.querySelectorAll('li'));
+
+            input.addEventListener('focus', () => {
+                dropdown.classList.add('open');
+                items.forEach(li => li.style.display = '');
+            });
+            input.addEventListener('input', () => {
+                const term = input.value.toLowerCase();
+                dropdown.classList.add('open');
+                items.forEach(li => {
+                    const label = (li.dataset.label || li.textContent).toLowerCase();
+                    li.style.display = label.includes(term) ? '' : 'none';
+                });
+            });
+            items.forEach(li => {
+                li.addEventListener('click', () => {
+                    input.value = li.dataset.value ? (li.dataset.label || li.textContent) : '';
+                    dropdown.classList.remove('open');
+                    onSelect(li.dataset.value);
+                });
+            });
+            document.addEventListener('click', e => {
+                if (!e.target.closest('#' + dropdownId) && e.target !== input)
+                    dropdown.classList.remove('open');
+            });
+        }
+
+        setupAutocomplete('clientSearch', 'clientDropdown', val => {
+            activeClient = val; historyPage = 1; applyHistory();
+        });
+        setupAutocomplete('gameSearch', 'gameDropdown', val => {
+            activeGameId = val.toLowerCase(); historyPage = 1; applyHistory();
+        });
+        document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+            activeClient = ''; activeGameId = ''; historyPage = 1;
+            document.getElementById('clientSearch').value = '';
+            document.getElementById('gameSearch').value   = '';
+            applyHistory();
+        });
+
+        applyHistory();
+    </script>
+}

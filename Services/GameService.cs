@@ -17,7 +17,7 @@ public class GameService
     };
 
     private static readonly string RentalsHeader =
-        "Game,Renter,Start Date,End Date,Phone Number,Recorded At,Received Date";
+        "Id,Renter,Start Date,End Date,Phone Number,Recorded At,Received Date,Game Ids";
 
     public GameService(IWebHostEnvironment env)
     {
@@ -32,62 +32,100 @@ public class GameService
 
     public List<Game> GetAllGames()
     {
+        if (!File.Exists(_gameListPath)) return [];
         using var reader = new StreamReader(_gameListPath);
         using var csv = new CsvReader(reader, CsvConfig);
         csv.Context.RegisterClassMap<GameMap>();
         return csv.GetRecords<Game>().ToList();
     }
 
-    /// <summary>
-    /// Flips the Availability field for a single game and rewrites game_list.csv.
-    /// Uses CsvHelper for both read and write so formatting stays consistent.
-    /// </summary>
-    public bool SetGameAvailability(string gameName, bool available)
+    public void AddGame(Game game)
     {
         var games = GetAllGames();
-        var game = games.FirstOrDefault(g =>
-            string.Equals(g.TabletopGame, gameName, StringComparison.OrdinalIgnoreCase));
+        game.Id = games.Count > 0 ? games.Max(g => g.Id) + 1 : 1;
+        games.Add(game);
+        WriteAllGames(games);
+    }
+
+    public bool UpdateGame(string originalName, Game updated)
+    {
+        var games = GetAllGames();
+        var index = games.FindIndex(g =>
+            string.Equals(g.TabletopGame, originalName, StringComparison.OrdinalIgnoreCase));
+        if (index < 0) return false;
+        updated.Id = games[index].Id; // preserve ID
+        games[index] = updated;
+        WriteAllGames(games);
+        return true;
+    }
+
+    public bool DeleteGame(string name)
+    {
+        var games = GetAllGames();
+        var removed = games.RemoveAll(g =>
+            string.Equals(g.TabletopGame, name, StringComparison.OrdinalIgnoreCase));
+        if (removed == 0) return false;
+        WriteAllGames(games);
+        return true;
+    }
+
+    public bool SetGameAvailability(int gameId, bool available)
+    {
+        var games = GetAllGames();
+        var game = games.FirstOrDefault(g => g.Id == gameId);
         if (game == null) return false;
         game.Availability = available;
         WriteAllGames(games);
         return true;
     }
 
+    private void WriteAllGames(List<Game> games)
+    {
+        EnsureDirectory(_gameListPath);
+        using var writer = new StreamWriter(_gameListPath, append: false, System.Text.Encoding.UTF8);
+        using var csv = new CsvWriter(writer, CsvConfig);
+        csv.Context.RegisterClassMap<GameMap>();
+        csv.WriteRecords(games);
+    }
+
     // ════════════════════════════════════════
-    //  Rentals
+    //  Rentals — one row per order
     // ════════════════════════════════════════
 
     /// <summary>
-    /// Appends one row per game. Received Date is left blank (open rental).
+    /// Appends a single order row. Game IDs stored as semicolon-separated ints.
     /// </summary>
-    public void AppendRentals(RentalRequest request)
+    public int AppendRental(RentalRequest request)
     {
         EnsureDirectory(_rentalsPath);
         var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         bool exists = File.Exists(_rentalsPath);
+        var orderId = GetNextRentalId();
+        var gameIds = string.Join(";", request.Games);
 
         using var writer = new StreamWriter(_rentalsPath, append: true, System.Text.Encoding.UTF8);
         if (!exists) writer.WriteLine(RentalsHeader);
 
-        foreach (var game in request.Games)
+        writer.WriteLine(string.Join(",", new[]
         {
-            writer.WriteLine(string.Join(",", new[]
-            {
-                Csv(game),
-                Csv(request.RenterName),
-                Csv(request.StartDate),
-                Csv(request.EndDate),
-                Csv(request.PhoneNumber),
-                Csv(timestamp),
-                "" // Received Date — filled in when returned
-            }));
-        }
+            orderId.ToString(),
+            Csv(request.RenterName),
+            Csv(request.StartDate),
+            Csv(request.EndDate),
+            Csv(request.PhoneNumber),
+            Csv(timestamp),
+            "",        // Received Date — blank until returned
+            Csv(gameIds)
+        }));
+
+        return orderId;
     }
 
     /// <summary>
-    /// Finds the most recent open rental for a game and stamps today as Received Date.
+    /// Marks an order as received by writing today's date into Received Date.
+    /// Also restores availability for all games in the order.
     /// </summary>
-    public bool MarkReceived(string gameName)
+    public bool MarkOrderReceived(int orderId)
     {
         if (!File.Exists(_rentalsPath)) return false;
 
@@ -95,24 +133,20 @@ public class GameService
         var receivedDate = DateTime.Now.ToString("yyyy-MM-dd");
         bool found = false;
 
-        // Walk backwards so the most recent open rental is hit first
-        for (int i = lines.Count - 1; i >= 1; i--)
+        for (int i = 1; i < lines.Count; i++)
         {
             var cols = SplitCsvLine(lines[i]);
-            if (cols.Length < 6) continue;
+            if (cols.Length < 8) continue;
 
-            var lineGame = cols[0].Trim('"').Trim();
-            var receivedCol = cols.Length > 6 ? cols[6].Trim().Trim('"') : "";
+            if (!int.TryParse(cols[0].Trim(), out var id) || id != orderId) continue;
 
-            if (string.Equals(lineGame, gameName, StringComparison.OrdinalIgnoreCase)
-                && string.IsNullOrWhiteSpace(receivedCol))
-            {
-                if (cols.Length < 7) Array.Resize(ref cols, 7);
-                cols[6] = Csv(receivedDate);
-                lines[i] = string.Join(",", cols);
-                found = true;
-                break;
-            }
+            var receivedCol = cols[6].Trim().Trim('"');
+            if (!string.IsNullOrWhiteSpace(receivedCol)) continue; // already received
+
+            cols[6] = Csv(receivedDate);
+            lines[i] = string.Join(",", cols);
+            found = true;
+            break;
         }
 
         if (found) File.WriteAllLines(_rentalsPath, lines, System.Text.Encoding.UTF8);
@@ -120,73 +154,111 @@ public class GameService
     }
 
     /// <summary>
-    /// Returns the most recent open rental per game name.
-    /// Key = game name, Value = (Renter, StartDate, EndDate)
+    /// Returns open rental info keyed by game ID for card display.
+    /// Value = (Renter, StartDate, EndDate, OrderId, IsOverdue)
     /// </summary>
-    public Dictionary<string, (string Renter, string StartDate, string EndDate)> GetOpenRentals()
+    public Dictionary<int, (string Renter, string StartDate, string EndDate, int OrderId, bool IsOverdue)>
+        GetOpenRentalsByGameId()
     {
-        var result = new Dictionary<string, (string, string, string)>(StringComparer.OrdinalIgnoreCase);
+        var result = new Dictionary<int, (string, string, string, int, bool)>();
         if (!File.Exists(_rentalsPath)) return result;
 
         foreach (var line in File.ReadAllLines(_rentalsPath).Skip(1))
         {
             var cols = SplitCsvLine(line);
-            if (cols.Length < 6) continue;
+            if (cols.Length < 8) continue;
 
-            var game = cols[0].Trim('"').Trim();
+            if (!int.TryParse(cols[0].Trim(), out var orderId)) continue;
+
             var renter = cols[1].Trim('"').Trim();
             var start = cols[2].Trim('"').Trim();
             var end = cols[3].Trim('"').Trim();
-            var receivedCol = cols.Length > 6 ? cols[6].Trim().Trim('"') : "";
+            var receivedCol = cols[6].Trim().Trim('"');
+            var gameIdsRaw = cols[7].Trim().Trim('"');
 
-            if (string.IsNullOrWhiteSpace(game)) continue;
+            if (!string.IsNullOrWhiteSpace(receivedCol)) continue; // closed order
 
-            if (string.IsNullOrWhiteSpace(receivedCol))
-                result[game] = (renter, start, end); // open — last entry wins
-            else
-                result.Remove(game);                 // closed — remove from open set
+            bool isOverdue = DateTime.TryParse(end, out var endDate) && endDate.Date < DateTime.Today;
+
+            foreach (var part in gameIdsRaw.Split(';', StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (int.TryParse(part.Trim(), out var gameId))
+                    result[gameId] = (renter, start, end, orderId, isOverdue);
+            }
         }
 
         return result;
     }
 
     /// <summary>
-    /// Returns full rental history grouped by game name, in chronological order.
+    /// Returns all rental records, most recent first.
     /// </summary>
-    public Dictionary<string, List<RentalRecord>> GetRentalHistory()
+    public List<RentalRecord> GetAllRentals()
     {
-        var result = new Dictionary<string, List<RentalRecord>>(StringComparer.OrdinalIgnoreCase);
+        var result = new List<RentalRecord>();
         if (!File.Exists(_rentalsPath)) return result;
 
         foreach (var line in File.ReadAllLines(_rentalsPath).Skip(1))
         {
             var cols = SplitCsvLine(line);
-            if (cols.Length < 6) continue;
+            if (cols.Length < 8) continue;
 
-            var game = cols[0].Trim('"').Trim();
-            if (string.IsNullOrWhiteSpace(game)) continue;
+            if (!int.TryParse(cols[0].Trim(), out var id)) continue;
 
-            var record = new RentalRecord
+            result.Add(new RentalRecord
             {
-                Game = game,
+                Id = id,
                 Renter = cols[1].Trim('"').Trim(),
                 StartDate = cols[2].Trim('"').Trim(),
                 EndDate = cols[3].Trim('"').Trim(),
                 PhoneNumber = cols[4].Trim('"').Trim(),
                 RecordedAt = cols[5].Trim('"').Trim(),
-                ReceivedDate = cols.Length > 6 ? cols[6].Trim('"').Trim() : ""
-            };
-
-            if (!result.ContainsKey(game)) result[game] = [];
-            result[game].Add(record);
+                ReceivedDate = cols[6].Trim('"').Trim(),
+                GameIds = cols[7].Trim('"').Trim()
+            });
         }
 
+        result.Sort((a, b) => b.Id.CompareTo(a.Id)); // most recent first
         return result;
+    }
+
+    /// <summary>
+    /// Returns all open orders that are due tomorrow — used by the overdue email service.
+    /// </summary>
+    public List<RentalRecord> GetOrdersDueTomorrow()
+    {
+        return GetAllRentals()
+            .Where(r => r.IsDueTomorrow)
+            .ToList();
+    }
+
+    /// <summary>
+    /// Returns all open orders that are overdue.
+    /// </summary>
+    public List<RentalRecord> GetOverdueOrders()
+    {
+        return GetAllRentals()
+            .Where(r => r.IsOverdue)
+            .ToList();
     }
 
     // ════════════════════════════════════════
     //  Private helpers
     // ════════════════════════════════════════
+
+    private int GetNextRentalId()
+    {
+        if (!File.Exists(_rentalsPath)) return 1;
+        var lines = File.ReadAllLines(_rentalsPath).Skip(1);
+        int max = 0;
+        foreach (var line in lines)
+        {
+            var cols = SplitCsvLine(line);
+            if (cols.Length > 0 && int.TryParse(cols[0].Trim(), out var id))
+                max = Math.Max(max, id);
+        }
+        return max + 1;
+    }
 
     private static void EnsureDirectory(string filePath)
     {
@@ -194,7 +266,6 @@ public class GameService
         if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
     }
 
-    /// <summary>RFC 4180-compliant escaper for the rentals log.</summary>
     private static string Csv(string? value)
     {
         if (string.IsNullOrEmpty(value)) return "";
@@ -203,7 +274,6 @@ public class GameService
         return value;
     }
 
-    /// <summary>Quoted-field-aware CSV line splitter for the rentals log.</summary>
     private static string[] SplitCsvLine(string line)
     {
         var fields = new List<string>();
@@ -229,65 +299,14 @@ public class GameService
         fields.Add(current.ToString());
         return fields.ToArray();
     }
-
-    /// <summary>
-    /// Appends a new game row to game_list.csv.
-    /// </summary>
-    public void AddGame(Game game)
-    {
-        var games = GetAllGames();
-        games.Add(game);
-        WriteAllGames(games);
-    }
-
-    /// <summary>
-    /// Replaces the game matching originalName with the updated game object.
-    /// </summary>
-    public bool UpdateGame(string originalName, Game updated)
-    {
-        var games = GetAllGames();
-        var index = games.FindIndex(g =>
-            string.Equals(g.TabletopGame, originalName, StringComparison.OrdinalIgnoreCase));
-
-        if (index < 0) return false;
-
-        games[index] = updated;
-        WriteAllGames(games);
-        return true;
-    }
-
-    /// <summary>
-    /// Removes the game matching the given name from game_list.csv.
-    /// </summary>
-    public bool DeleteGame(string name)
-    {
-        var games = GetAllGames();
-        var removed = games.RemoveAll(g =>
-            string.Equals(g.TabletopGame, name, StringComparison.OrdinalIgnoreCase));
-
-        if (removed == 0) return false;
-
-        WriteAllGames(games);
-        return true;
-    }
-
-    /// <summary>
-    /// Shared write helper — all mutations go through here so CsvHelper
-    /// config and class map are applied consistently every time.
-    /// </summary>
-    private void WriteAllGames(List<Game> games)
-    {
-        using var writer = new StreamWriter(_gameListPath, append: false, System.Text.Encoding.UTF8);
-        using var csv = new CsvWriter(writer, CsvConfig);
-        csv.Context.RegisterClassMap<GameMap>();
-        csv.WriteRecords(games);
-    }
 }
 
+// ── CsvHelper class map ───────────────────────────────────────────────────────
 public class GameMap : ClassMap<Game>
 {
     public GameMap()
     {
+        Map(m => m.Id).Name("Id");
         Map(m => m.Cover).Name("Cover");
         Map(m => m.TabletopGame).Name("Tabletop Game");
         Map(m => m.Category).Name("Category");

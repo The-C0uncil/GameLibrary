@@ -20,7 +20,8 @@ namespace GameLibrary.Controllers
         public IActionResult Index()
         {
             var games = _gameService.GetAllGames();
-            ViewBag.OpenRentals = _gameService.GetOpenRentals();
+            var openRentals = _gameService.GetOpenRentalsByGameId();
+            ViewBag.OpenRentals = openRentals;
             return View(games);
         }
 
@@ -37,12 +38,12 @@ namespace GameLibrary.Controllers
                     return Json(new { success = false, message = "Missing required fields." });
                 }
 
-                _gameService.AppendRentals(request);
+                var orderId = _gameService.AppendRental(request);
 
-                foreach (var game in request.Games)
-                    _gameService.SetGameAvailability(game, available: false);
+                foreach (var gameId in request.Games)
+                    _gameService.SetGameAvailability(gameId, available: false);
 
-                return Json(new { success = true });
+                return Json(new { success = true, orderId });
             }
             catch (Exception ex)
             {
@@ -51,15 +52,20 @@ namespace GameLibrary.Controllers
         }
 
         [HttpPost]
-        public IActionResult ReceiveGame([FromBody] ReceiveGameRequest request)
+        public IActionResult ReceiveOrder([FromBody] ReceiveGameRequest request)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(request.GameName))
-                    return Json(new { success = false, message = "Game name required." });
+                var order = _gameService.GetAllRentals()
+                    .FirstOrDefault(r => r.Id == request.GameId);
 
-                _gameService.MarkReceived(request.GameName);
-                _gameService.SetGameAvailability(request.GameName, available: true);
+                if (order == null)
+                    return Json(new { success = false, message = "Order not found." });
+
+                _gameService.MarkOrderReceived(request.GameId);
+
+                foreach (var gameId in order.ParsedGameIds)
+                    _gameService.SetGameAvailability(gameId, available: true);
 
                 return Json(new { success = true });
             }
@@ -71,9 +77,27 @@ namespace GameLibrary.Controllers
 
         public IActionResult RentalHistory()
         {
-            var history = _gameService.GetRentalHistory();
-            return View(history);
+            var rentals = _gameService.GetAllRentals();
+            var games = _gameService.GetAllGames();
+
+            // Build a simple string→string dict that survives ViewBag without cast issues
+            var gameNameById = games.ToDictionary(
+                g => g.Id.ToString(),
+                g => g.TabletopGame
+            );
+
+            // Pre-resolve names for every order so the view never needs a lookup
+            var orderGameNames = rentals.ToDictionary(
+                r => r.Id,
+                r => r.ParsedGameIds
+                        .Select(id => gameNameById.TryGetValue(id.ToString(), out var n) ? n : $"#{id}")
+                        .ToList()
+            );
+
+            ViewBag.OrderGameNames = orderGameNames;
+            return View(rentals);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> SubmitContactForm([FromBody] ContactForm form)
