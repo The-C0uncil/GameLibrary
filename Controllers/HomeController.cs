@@ -25,6 +25,11 @@ namespace GameLibrary.Controllers
             return View(games);
         }
 
+
+        // ════════════════════════════════════════════════════════════════════════════
+        //  Actions
+        // ════════════════════════════════════════════════════════════════════════════
+
         [HttpPost]
         public IActionResult SubmitRental([FromBody] RentalRequest request)
         {
@@ -97,7 +102,6 @@ namespace GameLibrary.Controllers
             ViewBag.OrderGameNames = orderGameNames;
             return View(rentals);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> SubmitContactForm([FromBody] ContactForm form)

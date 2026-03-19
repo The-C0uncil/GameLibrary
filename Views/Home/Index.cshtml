@@ -1,7 +1,7 @@
 ﻿@model List<GameLibrary.Models.Game>
 @{
     var openRentals = ViewBag.OpenRentals as Dictionary<int, (string Renter, string StartDate, string EndDate, int OrderId, bool IsOverdue)>
-                      ?? new Dictionary<int, (string, string, string, int, bool)>();
+                        ?? new Dictionary<int, (string, string, string, int, bool)>();
 }
 
 <div class="games-grid-container">
@@ -16,6 +16,7 @@
             <div class="@cardClass"
                 data-game-id="@game.Id"
                 data-game-name="@game.TabletopGame"
+                data-game-price="@game.Price"
                 data-order-id="@(isUnavailable ? rental.OrderId.ToString() : "")"
                 data-sort-name="@game.TabletopGame"
                 data-sort-bgg="@game.BGGScore"
@@ -30,7 +31,7 @@
                 data-filter-availability="@(isUnavailable ? "unavailable" : "available")"
                 @(isUnavailable ? "aria-disabled=true" : "")>
 
-                <!-- Image area — expansion + category pills + checkmark + banners stay here -->
+                <!-- Image area -->
                 <div class="card-img-wrap">
                     @if (!string.IsNullOrEmpty(game.Cover))
                     {
@@ -41,8 +42,8 @@
                         <img src="~/images/placeholder.svg" alt="@game.TabletopGame">
                     }
 
-                    <!-- Bottom-right: expansion pill + category (stays on image) -->
-                    <div class="bottom-right-labels">
+                    <!-- Category + expansion pills — top-right -->
+                    <div class="top-right-labels">
                         @if (game.Type?.ToString().Equals("Expansion", StringComparison.OrdinalIgnoreCase) == true)
                         {
                             <div class="category-label expansion-label">Expansion</div>
@@ -53,9 +54,14 @@
                         }
                     </div>
 
-                    <!-- Selected checkmark (stays on image) -->
+                    <!-- Selected checkmark — top-left -->
                     <div class="selected-indicator">
                         <span class="material-symbols-rounded">check</span>
+                    </div>
+
+                    <!-- Game title — bottom-left overlay -->
+                    <div class="card-title-wrap">
+                        <h3 class="card-title">@game.TabletopGame</h3>
                     </div>
 
                     @if (isUnavailable)
@@ -81,48 +87,66 @@
                     }
                 </div>
 
-                <!-- Card body -->
+                <!-- Card body — info rows + add to cart -->
                 <div class="card-body">
-                    <!-- Title — no clamp, always full -->
-                    <div class="card-title-wrap">
-                        <h3 class="card-title">@game.TabletopGame</h3>
-                    </div>
                     <div class="card-divider"></div>
-
                     <div class="card-info">
-                        <!-- Tier + Age moved below image -->
-                        <div class="info-row info-row-meta">
-                            @if (!string.IsNullOrEmpty(game.Tier))
-                            {
-                                <span class="meta-pill meta-tier">Tier @game.Tier</span>
-                            }
-                            @if (!string.IsNullOrEmpty(game.Age))
-                            {
-                                <span class="meta-pill meta-age">@game.Age</span>
-                            }
+
+                        <!-- Row 1: players left, tier right -->
+                        <div class="info-row-split">
+                            <div class="info-row-left">
+                                <span class="material-symbols-rounded info-icon" style="color:#7eb8d4">group</span>
+                                <span class="value">@game.PlayerCount</span>
+                            </div>
+                            <div class="info-row-right-pills">
+                                @if (!string.IsNullOrEmpty(game.Tier))
+                                {
+                                    <span class="meta-pill meta-tier">Tier @game.Tier</span>
+                                }
+                            </div>
                         </div>
-                        <div class="info-row">
-                            <span class="material-symbols-rounded info-icon" style="color:#7eb8d4">group</span>
-                            <span class="value">@game.PlayerCount</span>
+
+                        <!-- Row 2: playtime left, age right -->
+                        <div class="info-row-split" style="margin-bottom: 0.5rem;">
+                            <div class="info-row-left">
+                                <span class="material-symbols-rounded info-icon" style="color:#e8b04b">schedule</span>
+                                <span class="value">@game.AvgPlaytime</span>
+                            </div>
+                            <div class="info-row-right-pills">
+                                @if (!string.IsNullOrEmpty(game.Age))
+                                {
+                                    <span class="meta-pill meta-age">@game.Age</span>
+                                }
+                            </div>
                         </div>
-                        <div class="info-row">
-                            <span class="material-symbols-rounded info-icon" style="color:#e8b04b">schedule</span>
-                            <span class="value">@game.AvgPlaytime</span>
-                        </div>
-                        <div class="info-row info-row-right">
+
+                        <!-- Row 3: BGG left, Add button right -->
+                        <div class="info-row-bottom">
                             <a class="bgg-score" href="@game.URL" target="_blank" rel="noopener noreferrer"
                                 title="View on BoardGameGeek" onclick="event.stopPropagation()">
                                 <img src="~/images/bgg.svg" alt="BGG" class="bgg-icon">
-                                @game.BGGScore
+                                <strong>@game.BGGScore</strong>
                             </a>
+                            @if (!isUnavailable)
+                            {
+                                <button class="btn-add-cart"
+                                        data-game-id="@game.Id"
+                                        data-game-name="@game.TabletopGame"
+                                        data-game-price="@game.Price"
+                                        onclick="event.stopPropagation(); cartToggle(this)"
+                                        title="Add to cart">
+                                    <span class="material-symbols-rounded">add</span>
+                                    Add
+                                </button>
+                            }
                         </div>
+
                     </div>
                 </div>
             </div>
         }
     </div>
 
-    <!-- Pagination -->
     <div class="pagination-wrap" id="gridPagination"></div>
 </div>
 
@@ -206,44 +230,6 @@
     </div>
 </div>
 
-<!-- Contact Form Modal -->
-<div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Contact Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Name *</label>
-                    <input type="text" class="form-control" id="name" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Phone Number *</label>
-                    <input type="tel" class="form-control" id="phone" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email Address *</label>
-                    <input type="email" class="form-control" id="email" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Address (Optional)</label>
-                    <textarea class="form-control" id="address" rows="3"></textarea>
-                </div>
-                <div id="selectedGamesDisplay" class="mb-3">
-                    <p class="modal-games-label">Selected Games:</p>
-                    <div id="selectedGamesList" class="selected-chips"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Rent Modal -->
 <div class="modal fade" id="rentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -261,7 +247,6 @@
                     <label for="rentStartDate" class="form-label">Start Date *</label>
                     <input type="date" class="form-control" id="rentStartDate" required>
                 </div>
-                <!-- End date set automatically — hidden from user -->
                 <input type="hidden" id="rentEndDate">
                 <div class="mb-2">
                     <span class="form-label d-block">End Date</span>
@@ -271,9 +256,14 @@
                     <label for="renterPhone" class="form-label">Phone Number (Optional)</label>
                     <input type="tel" class="form-control" id="renterPhone">
                 </div>
-                <div id="rentSelectedGamesDisplay" class="mb-3">
+                <div id="rentSelectedGamesDisplay" class="mb-2">
                     <p class="modal-games-label">Selected Games:</p>
                     <div id="rentSelectedGamesList" class="selected-chips"></div>
+                </div>
+                <!-- Rental price summary -->
+                <div class="rental-price-summary" id="rentalPriceSummary">
+                    <span class="rental-price-label">Rental Price</span>
+                    <span class="rental-price-value" id="rentalPriceValue">€0</span>
                 </div>
             </div>
             <div class="modal-footer">

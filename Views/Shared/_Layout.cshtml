@@ -54,6 +54,10 @@
                             <p class="cart-empty-msg">No games selected</p>
                         </div>
                         <div class="cart-dropdown-footer">
+                            <div class="cart-price-total">
+                                <span class="cart-price-total-label">Rental Price</span>
+                                <span class="cart-price-total-value" id="cartPriceTotal">€0</span>
+                            </div>
                             <button class="btn btn-success btn-sm w-100 d-flex align-items-center justify-content-center gap-2"
                                     id="cartOrderBtn" disabled>
                                 Order
@@ -123,8 +127,10 @@
 
         // Called by site.js whenever selectedGames changes
         function updateCartUI(selectedGames) {
-            const badge = document.getElementById('cartBadge');
-            const list  = document.getElementById('cartDropdownList');
+            const badge      = document.getElementById('cartBadge');
+            const list       = document.getElementById('cartDropdownList');
+            const priceTotal = document.getElementById('cartPriceTotal');
+            const orderBtn   = document.getElementById('cartOrderBtn');
             if (!badge || !list) return;
 
             const count = selectedGames.length;
@@ -141,7 +147,12 @@
                         </button>
                     </div>`).join('');
 
-            const orderBtn = document.getElementById('cartOrderBtn');
+            // Price total — calculated by site.js's calcRentalPrice if available
+            if (priceTotal && typeof calcRentalPrice === 'function') {
+                const price = calcRentalPrice(selectedGames);
+                priceTotal.textContent = price > 0 ? `€${price}` : '€0';
+            }
+
             if (orderBtn) orderBtn.disabled = count === 0;
         }
     </script>

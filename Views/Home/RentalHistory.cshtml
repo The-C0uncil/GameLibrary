@@ -64,6 +64,13 @@
             <button class="sf-clear-btn" id="clearHistoryBtn">Clear</button>
         </div>
 
+        <!-- Stats bar: between filters and list -->
+        <div class="history-stats-bar" id="historyStatsBar">
+            <span id="historyOrderCount">@Model.Count order@(Model.Count != 1 ? "s" : "")</span>
+            <span class="history-stats-sep">·</span>
+            <span class="history-stats-total" id="historyPriceTotal">€0</span>
+        </div>
+
         <!-- Orders — server rendered, filtered/paged by JS -->
         <div id="orderList">
             @foreach (var o in Model)
@@ -75,7 +82,8 @@
 
                 <div class="history-order-card"
                      data-renter="@o.Renter.ToLower()"
-                     data-game-names="@namesCsv">
+                     data-game-names="@namesCsv"
+                     data-rental-price="@o.RentalPrice.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)">
 
                     <div class="history-order-header">
                         <span class="history-order-id">#@o.Id</span>
@@ -140,6 +148,15 @@
             const start = (historyPage - 1) * HISTORY_PAGE_SIZE;
             filtered.slice(start, start + HISTORY_PAGE_SIZE)
                     .forEach(c => c.style.display = '');
+
+            // Update price bar
+            const total = filtered.reduce((sum, c) => {
+                return sum + (parseFloat(c.dataset.rentalPrice) || 0);
+            }, 0);
+            const totalEl = document.getElementById('historyPriceTotal');
+            const countEl = document.getElementById('historyOrderCount');
+            if (totalEl) totalEl.textContent = `€${total.toFixed(2)}`;
+            if (countEl) countEl.textContent  = `${filtered.length} order${filtered.length !== 1 ? 's' : ''}`;
 
             renderHistoryPagination(filtered.length);
         }

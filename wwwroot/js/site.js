@@ -4,17 +4,55 @@
 const PAGE_SIZE = 21;
 
 // ════════════════════════════════════════
-//  Game selection (single click — available cards only)
+//  Rental price tier calculation
 // ════════════════════════════════════════
-let selectedGames = []; // [{ id, name }]
+function calcRentalPrice(games) {
+    const total = games.reduce((sum, g) => {
+        const p = parseFloat(g.price) || 0;
+        return sum + p;
+    }, 0);
+    if (total <= 0)   return 0;
+    if (total <= 60)  return 7;
+    if (total <= 120) return 13;
+    if (total <= 250) return 21;
+    return 28;
+}
 
-document.querySelectorAll('.game-card:not(.unavailable)').forEach(card => {
-    card.addEventListener('click', function () {
-        const gameId   = parseInt(this.getAttribute('data-game-id'));
-        const gameName = this.getAttribute('data-game-name');
+function updateRentalPriceDisplay() {
+    const price = calcRentalPrice(selectedGames);
+    const el = document.getElementById('rentalPriceValue');
+    if (el) el.textContent = price > 0 ? `€${price}` : '€0';
+}
+
+// ════════════════════════════════════════
+//  Cart add/remove (triggered by button, not card click)
+// ════════════════════════════════════════
+let selectedGames = []; // [{ id, name, price }]
+
+// Called by the add/remove button on each card
+window.cartToggle = function(btn) {
+    const gameId   = parseInt(btn.dataset.gameId);
+    const gameName = btn.dataset.gameName;
+    const price    = btn.dataset.gamePrice || '0';
+    const inCart   = selectedGames.findIndex(g => g.id === gameId) >= 0;
+
+    if (inCart) {
+        // Remove from cart
         toggleGameSelection(gameId, gameName);
-    });
-});
+    } else {
+        // Add to cart
+        selectedGames.push({ id: gameId, name: gameName, price });
+        const card = btn.closest('.game-card');
+        if (card) card.classList.add('selected');
+        btn.classList.add('in-cart');
+        btn.innerHTML = '<span class="material-symbols-rounded">close</span> Remove';
+
+        updateFabs();
+        refreshRentChips();
+        updateRentalPriceDisplay();
+        if (typeof updateCartUI === 'function') updateCartUI(selectedGames);
+    }
+};
 
 function toggleGameSelection(gameId, gameName) {
     const card  = document.querySelector(`.game-card[data-game-id="${gameId}"]`);
@@ -22,15 +60,23 @@ function toggleGameSelection(gameId, gameName) {
 
     if (index >= 0) {
         selectedGames.splice(index, 1);
-        if (card) card.classList.remove('selected');
+        if (card) {
+            card.classList.remove('selected');
+            const btn = card.querySelector('.btn-add-cart');
+            if (btn) {
+                btn.classList.remove('in-cart');
+                btn.innerHTML = '<span class="material-symbols-rounded">add</span> Add';
+            }
+        }
     } else {
-        selectedGames.push({ id: gameId, name: gameName });
+        const price = card ? (card.dataset.gamePrice || '0') : '0';
+        selectedGames.push({ id: gameId, name: gameName, price });
         if (card) card.classList.add('selected');
     }
 
     updateFabs();
-    refreshContactChips();
     refreshRentChips();
+    updateRentalPriceDisplay();
     if (typeof updateCartUI === 'function') updateCartUI(selectedGames);
 }
 
@@ -63,13 +109,6 @@ function buildChips(containerEl) {
     });
 }
 
-function refreshContactChips() {
-    const container = document.getElementById('selectedGamesList');
-    if (container) buildChips(container);
-    const display = document.getElementById('selectedGamesDisplay');
-    if (display) display.style.display = selectedGames.length > 0 ? '' : 'none';
-}
-
 function refreshRentChips() {
     const container = document.getElementById('rentSelectedGamesList');
     if (container) buildChips(container);
@@ -77,8 +116,11 @@ function refreshRentChips() {
     if (display) display.style.display = selectedGames.length > 0 ? '' : 'none';
 }
 
-document.getElementById('contactModal').addEventListener('show.bs.modal', refreshContactChips);
-document.getElementById('rentModal').addEventListener('show.bs.modal', refreshRentChips);
+const rentModalEl = document.getElementById('rentModal');
+if (rentModalEl) rentModalEl.addEventListener('show.bs.modal', () => {
+    refreshRentChips();
+    updateRentalPriceDisplay();
+});
 
 
 // ════════════════════════════════════════
@@ -193,7 +235,8 @@ document.getElementById('submitRentBtn').addEventListener('click', async functio
         startDate,
         endDate,
         phoneNumber: phone,
-        games: selectedGames.map(g => g.id)
+        games: selectedGames.map(g => g.id),
+        rentalPrice: calcRentalPrice(selectedGames)
     };
 
     try {
@@ -252,6 +295,7 @@ document.getElementById('submitRentBtn').addEventListener('click', async functio
             selectedGames = [];
             updateFabs();
             refreshRentChips();
+            updateRentalPriceDisplay();
             if (typeof updateCartUI === 'function') updateCartUI(selectedGames);
             bootstrap.Modal.getInstance(document.getElementById('rentModal')).hide();
         } else {
@@ -265,48 +309,10 @@ document.getElementById('submitRentBtn').addEventListener('click', async functio
 
 
 // ════════════════════════════════════════
-//  Contact form
+//  Sort & Filter panel (home page only)
 // ════════════════════════════════════════
-document.getElementById('submitBtn').addEventListener('click', async function () {
-    const name    = document.getElementById('name').value;
-    const phone   = document.getElementById('phone').value;
-    const email   = document.getElementById('email').value;
-    const address = document.getElementById('address').value;
-
-    if (!name || !phone || !email) {
-        alert('Please fill in all required fields (Name, Phone, Email)');
-        return;
-    }
-
-    try {
-        const response = await fetch('/Home/SubmitContactForm', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name, phoneNumber: phone, email, address,
-                selectedGames: selectedGames.map(g => g.name)
-            })
-        });
-        const result = await response.json();
-        if (result.success) {
-            selectedGames = [];
-            document.querySelectorAll('.game-card.selected').forEach(c => c.classList.remove('selected'));
-            updateFabs();
-            refreshContactChips();
-            bootstrap.Modal.getInstance(document.getElementById('contactModal')).hide();
-        } else {
-            alert('Error submitting form: ' + result.message);
-        }
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-
-// ════════════════════════════════════════
-//  Sort & Filter panel
-// ════════════════════════════════════════
-const sfBtn      = document.getElementById('sortFilterBtn');
+const sfBtn = document.getElementById('sortFilterBtn');
+if (sfBtn) {
 const sfPanel    = document.getElementById('sfPanel');
 const sfBackdrop = document.getElementById('sfBackdrop');
 
@@ -466,3 +472,4 @@ function applyFiltersAndSort() {
 }
 
 applyFiltersAndSort();
+} // end sfBtn guard

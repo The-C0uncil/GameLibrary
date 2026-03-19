@@ -16,14 +16,16 @@ public class GameService
         MissingFieldFound = null
     };
 
+    // Rentals CSV columns:
+    // Id, Renter, Start Date, End Date, Phone Number, Recorded At, Received Date, Game Ids
     private static readonly string RentalsHeader =
-        "Id,Renter,Start Date,End Date,Phone Number,Recorded At,Received Date,Game Ids";
+        "Id,Renter,Start Date,End Date,Phone Number,Recorded At,Received Date,Game Ids,Rental Price";
 
     public GameService(IWebHostEnvironment env)
     {
-        var dataDir = Path.Combine(env.ContentRootPath, "Data");
+        var dataDir   = Path.Combine(env.ContentRootPath, "Data");
         _gameListPath = Path.Combine(dataDir, "game_list.csv");
-        _rentalsPath = Path.Combine(dataDir, "rentals.csv");
+        _rentalsPath  = Path.Combine(dataDir, "rentals.csv");
     }
 
     // ════════════════════════════════════════
@@ -34,15 +36,26 @@ public class GameService
     {
         if (!File.Exists(_gameListPath)) return [];
         using var reader = new StreamReader(_gameListPath);
-        using var csv = new CsvReader(reader, CsvConfig);
+        using var csv    = new CsvReader(reader, CsvConfig);
         csv.Context.RegisterClassMap<GameMap>();
-        return csv.GetRecords<Game>().ToList();
+        var games = csv.GetRecords<Game>().ToList();
+
+        // If the CSV has no Id column (all zeros), assign stable positional IDs
+        // and write them back so future reads are consistent.
+        if (games.Count > 0 && games.All(g => g.Id == 0))
+        {
+            for (int i = 0; i < games.Count; i++)
+                games[i].Id = i + 1;
+            WriteAllGames(games);
+        }
+
+        return games;
     }
 
     public void AddGame(Game game)
     {
-        var games = GetAllGames();
-        game.Id = games.Count > 0 ? games.Max(g => g.Id) + 1 : 1;
+        var games  = GetAllGames();
+        game.Id    = games.Count > 0 ? games.Max(g => g.Id) + 1 : 1;
         games.Add(game);
         WriteAllGames(games);
     }
@@ -53,7 +66,7 @@ public class GameService
         var index = games.FindIndex(g =>
             string.Equals(g.TabletopGame, originalName, StringComparison.OrdinalIgnoreCase));
         if (index < 0) return false;
-        updated.Id = games[index].Id; // preserve ID
+        updated.Id   = games[index].Id; // preserve ID
         games[index] = updated;
         WriteAllGames(games);
         return true;
@@ -61,7 +74,7 @@ public class GameService
 
     public bool DeleteGame(string name)
     {
-        var games = GetAllGames();
+        var games   = GetAllGames();
         var removed = games.RemoveAll(g =>
             string.Equals(g.TabletopGame, name, StringComparison.OrdinalIgnoreCase));
         if (removed == 0) return false;
@@ -72,7 +85,7 @@ public class GameService
     public bool SetGameAvailability(int gameId, bool available)
     {
         var games = GetAllGames();
-        var game = games.FirstOrDefault(g => g.Id == gameId);
+        var game  = games.FirstOrDefault(g => g.Id == gameId);
         if (game == null) return false;
         game.Availability = available;
         WriteAllGames(games);
@@ -83,7 +96,7 @@ public class GameService
     {
         EnsureDirectory(_gameListPath);
         using var writer = new StreamWriter(_gameListPath, append: false, System.Text.Encoding.UTF8);
-        using var csv = new CsvWriter(writer, CsvConfig);
+        using var csv    = new CsvWriter(writer, CsvConfig);
         csv.Context.RegisterClassMap<GameMap>();
         csv.WriteRecords(games);
     }
@@ -99,9 +112,9 @@ public class GameService
     {
         EnsureDirectory(_rentalsPath);
         var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        bool exists = File.Exists(_rentalsPath);
-        var orderId = GetNextRentalId();
-        var gameIds = string.Join(";", request.Games);
+        bool exists   = File.Exists(_rentalsPath);
+        var  orderId  = GetNextRentalId();
+        var  gameIds  = string.Join(";", request.Games);
 
         using var writer = new StreamWriter(_rentalsPath, append: true, System.Text.Encoding.UTF8);
         if (!exists) writer.WriteLine(RentalsHeader);
@@ -115,7 +128,8 @@ public class GameService
             Csv(request.PhoneNumber),
             Csv(timestamp),
             "",        // Received Date — blank until returned
-            Csv(gameIds)
+            Csv(gameIds),
+            request.RentalPrice.ToString("F2", CultureInfo.InvariantCulture)
         }));
 
         return orderId;
@@ -129,9 +143,9 @@ public class GameService
     {
         if (!File.Exists(_rentalsPath)) return false;
 
-        var lines = File.ReadAllLines(_rentalsPath).ToList();
+        var lines        = File.ReadAllLines(_rentalsPath).ToList();
         var receivedDate = DateTime.Now.ToString("yyyy-MM-dd");
-        bool found = false;
+        bool found       = false;
 
         for (int i = 1; i < lines.Count; i++)
         {
@@ -143,9 +157,9 @@ public class GameService
             var receivedCol = cols[6].Trim().Trim('"');
             if (!string.IsNullOrWhiteSpace(receivedCol)) continue; // already received
 
-            cols[6] = Csv(receivedDate);
+            cols[6]  = Csv(receivedDate);
             lines[i] = string.Join(",", cols);
-            found = true;
+            found    = true;
             break;
         }
 
@@ -170,11 +184,11 @@ public class GameService
 
             if (!int.TryParse(cols[0].Trim(), out var orderId)) continue;
 
-            var renter = cols[1].Trim('"').Trim();
-            var start = cols[2].Trim('"').Trim();
-            var end = cols[3].Trim('"').Trim();
+            var renter      = cols[1].Trim('"').Trim();
+            var start       = cols[2].Trim('"').Trim();
+            var end         = cols[3].Trim('"').Trim();
             var receivedCol = cols[6].Trim().Trim('"');
-            var gameIdsRaw = cols[7].Trim().Trim('"');
+            var gameIdsRaw  = cols[7].Trim().Trim('"');
 
             if (!string.IsNullOrWhiteSpace(receivedCol)) continue; // closed order
 
@@ -207,14 +221,19 @@ public class GameService
 
             result.Add(new RentalRecord
             {
-                Id = id,
-                Renter = cols[1].Trim('"').Trim(),
-                StartDate = cols[2].Trim('"').Trim(),
-                EndDate = cols[3].Trim('"').Trim(),
-                PhoneNumber = cols[4].Trim('"').Trim(),
-                RecordedAt = cols[5].Trim('"').Trim(),
+                Id           = id,
+                Renter       = cols[1].Trim('"').Trim(),
+                StartDate    = cols[2].Trim('"').Trim(),
+                EndDate      = cols[3].Trim('"').Trim(),
+                PhoneNumber  = cols[4].Trim('"').Trim(),
+                RecordedAt   = cols[5].Trim('"').Trim(),
                 ReceivedDate = cols[6].Trim('"').Trim(),
-                GameIds = cols[7].Trim('"').Trim()
+                GameIds      = cols[7].Trim('"').Trim(),
+                RentalPrice  = cols.Length > 8 && decimal.TryParse(
+                                   cols[8].Trim('"').Trim(),
+                                   System.Globalization.NumberStyles.Any,
+                                   CultureInfo.InvariantCulture,
+                                   out var price) ? price : 0
             });
         }
 
@@ -250,7 +269,7 @@ public class GameService
     {
         if (!File.Exists(_rentalsPath)) return 1;
         var lines = File.ReadAllLines(_rentalsPath).Skip(1);
-        int max = 0;
+        int max   = 0;
         foreach (var line in lines)
         {
             var cols = SplitCsvLine(line);
@@ -276,8 +295,8 @@ public class GameService
 
     private static string[] SplitCsvLine(string line)
     {
-        var fields = new List<string>();
-        bool inQ = false;
+        var fields  = new List<string>();
+        bool inQ    = false;
         var current = new System.Text.StringBuilder();
 
         for (int i = 0; i < line.Length; i++)
