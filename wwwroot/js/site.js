@@ -325,10 +325,10 @@ sfBackdrop.addEventListener('click', closePanel);
 const filterGroups = {
     category:     document.getElementById('filterCategory'),
     theme:        document.getElementById('filterTheme'),
-    tier:         document.getElementById('filterTier'),
+    // tier:         document.getElementById('filterTier'),
     type:         document.getElementById('filterType'),
     complexity:   document.getElementById('filterComplexity'),
-    availability: document.getElementById('filterAvailability'),
+    // availability: document.getElementById('filterAvailability'),
 };
 
 const allCards = Array.from(document.querySelectorAll('.game-card'));

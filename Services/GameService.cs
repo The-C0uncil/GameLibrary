@@ -230,10 +230,10 @@ public class GameService
                 ReceivedDate = cols[6].Trim('"').Trim(),
                 GameIds      = cols[7].Trim('"').Trim(),
                 RentalPrice  = cols.Length > 8 && decimal.TryParse(
-                                   cols[8].Trim('"').Trim(),
-                                   System.Globalization.NumberStyles.Any,
-                                   CultureInfo.InvariantCulture,
-                                   out var price) ? price : 0
+                                    cols[8].Trim('"').Trim(),
+                                    System.Globalization.NumberStyles.Any,
+                                    CultureInfo.InvariantCulture,
+                                    out var price) ? price : 0
             });
         }
 

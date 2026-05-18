@@ -3,7 +3,7 @@
     ViewData["Title"] = "Rental History";
     // OrderGameNames is Dictionary<int, List<string>> — order ID → list of game names
     var orderGameNames = ViewBag.OrderGameNames as Dictionary<int, List<string>>
-                         ?? new Dictionary<int, List<string>>();
+                        ?? new Dictionary<int, List<string>>();
 
     // For the game filter dropdown: collect all unique names across all orders
     var allGameNames = orderGameNames.Values
@@ -13,7 +13,7 @@
         .ToList();
 
     var clients = Model.Select(r => r.Renter).Where(r => !string.IsNullOrEmpty(r))
-                       .Distinct().OrderBy(r => r).ToList();
+                        .Distinct().OrderBy(r => r).ToList();
 }
 
 <div class="rental-history-container">
@@ -81,9 +81,9 @@
                 var statusLabel = o.IsOverdue ? "Overdue"       : (o.IsOpen ? "Out"        : "Returned");
 
                 <div class="history-order-card"
-                     data-renter="@o.Renter.ToLower()"
-                     data-game-names="@namesCsv"
-                     data-rental-price="@o.RentalPrice.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)">
+                    data-renter="@o.Renter.ToLower()"
+                    data-game-names="@namesCsv"
+                    data-rental-price="@o.RentalPrice.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)">
 
                     <div class="history-order-header">
                         <span class="history-order-id">#@o.Id</span>

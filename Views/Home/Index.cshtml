@@ -98,12 +98,12 @@
                                 <span class="material-symbols-rounded info-icon" style="color:#7eb8d4">group</span>
                                 <span class="value">@game.PlayerCount</span>
                             </div>
-                            <div class="info-row-right-pills">
+                            @* <div class="info-row-right-pills">
                                 @if (!string.IsNullOrEmpty(game.Tier))
                                 {
                                     <span class="meta-pill meta-tier">Tier @game.Tier</span>
                                 }
-                            </div>
+                            </div> *@
                         </div>
 
                         <!-- Row 2: playtime left, age right -->
@@ -127,7 +127,7 @@
                                 <img src="~/images/bgg.svg" alt="BGG" class="bgg-icon">
                                 <strong>@game.BGGScore</strong>
                             </a>
-                            @if (!isUnavailable)
+                            @* @if (!isUnavailable)
                             {
                                 <button class="btn-add-cart"
                                         data-game-id="@game.Id"
@@ -138,7 +138,7 @@
                                     <span class="material-symbols-rounded">add</span>
                                     Add
                                 </button>
-                            }
+                            } *@
                         </div>
 
                     </div>
@@ -196,14 +196,14 @@
             <div class="sf-badge-group" id="filterCategory" data-filter="category"></div>
             <p class="sf-group-label">Theme</p>
             <div class="sf-badge-group" id="filterTheme" data-filter="theme"></div>
-            <p class="sf-group-label">Tier</p>
-            <div class="sf-badge-group" id="filterTier" data-filter="tier"></div>
+            @* <p class="sf-group-label">Tier</p>
+            <div class="sf-badge-group" id="filterTier" data-filter="tier"></div> *@
             <p class="sf-group-label">Type</p>
             <div class="sf-badge-group" id="filterType" data-filter="type"></div>
             <p class="sf-group-label">Complexity</p>
             <div class="sf-badge-group" id="filterComplexity" data-filter="complexity"></div>
-            <p class="sf-group-label">Availability</p>
-            <div class="sf-badge-group" id="filterAvailability" data-filter="availability"></div>
+            @* <p class="sf-group-label">Availability</p>
+            <div class="sf-badge-group" id="filterAvailability" data-filter="availability"></div> *@
         </div>
     </div>
 </div>
