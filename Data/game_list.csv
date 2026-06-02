@@ -1,25 +1,35 @@
 ﻿Id,Cover,Tabletop Game,Category,Theme,Complexity,Price,Tier,Type,BGG Score,Player Count,Age,Recommended Players,Avg. Playtime,Availability,Missing Parts,URL
 1,7-wonders-duel,7 Wonders Duel (2015),2-Player,Civilization,Medium Light,20,I,Original,"8,1",2,+10,2,30-60min,True,,https://boardgamegeek.com/boardgame/173346/7-wonders-duel
 2,alhambra,Alhambra (2003),Tile-Placement,Medieval,Medium Light,50,I,Original,"7,5",2-6,+8,2-6,1h,True,,https://boardgamegeek.com/boardgame/6249/alhambra
-3,ark-nova,Ark Nova (2021),Engine-Building,Animals,Medium Heavy,60,I,Original,"8,6",1-4,+14,2-3,2-3h,True,,https://boardgamegeek.com/boardgame/342942/ark-nova
-4,bang-the-dice-game,BANG! The Dice Game (2013),Party Game,Western,Light,20,I,Original,"6,9",3-8,+8,5-8,20min,True,,https://boardgamegeek.com/boardgame/143741/bang-the-dice-game
-5,brass-birmingham,Brass: Birmingham (2018),Strategy,Industrial/Economic,Heavy,80,S,Board Game,"8,6",2–4,14+,3,2h,True,,https://boardgamegeek.com/boardgame/224517/brass-birmingham
+3,bang-the-dice-game,BANG! The Dice Game (2013),Party Game,Western,Light,20,I,Original,"6,9",3-8,+8,5-8,20min,True,,https://boardgamegeek.com/boardgame/143741/bang-the-dice-game
+4,bang-the-dice-game-old-saloon,BANG! The Dice Game: Old Saloon (2016),Party Game,Western,Light,15,I,Expansion,"7,5",3-8,+8,5-8,20min,True,,https://boardgamegeek.com/boardgame/193614/bang-the-dice-game-old-saloon
+5,brass-birmingham,Brass: Birmingham (2018),Strategy,Industrial/Economic,Heavy,80,S,Board Game,,2–4,14+,3,120,True,,https://boardgamegeek.com/boardgame/224517/brass-birmingham
 6,ca-dollar-h-n-guns-second-edition,Ca$h 'n Guns (2nd Edition) (2014),Party Game,Crime,Light,40,I,Original,"6,9",4-8,+8,5-8,40min,True,,https://boardgamegeek.com/boardgame/155362/cash-n-guns-second-edition
 7,ca-dollar-h-n-guns-second-edition-more-ca-dollar-h,Ca$h 'n Guns (2nd Edition):  More Ca$h 'n More Guns (2015),Party Game,Crime,Light,20,I,Expansion,"7,3",4-8,+8,5-8,40min,True,,https://boardgamegeek.com/boardgame/181228/ca-dollar-h-n-guns-second-edition-more-ca-dollar-h
 8,ca-dollar-h-n-guns-second-edition-team-spirit,Ca$h 'n Guns (2nd Edition): Team Spirit (2016),Party Game,Crime,Light,20,I,Expansion,"7,3",4-9,+8,5-9,40min,True,,https://boardgamegeek.com/boardgame/199240/ca-dollar-h-n-guns-second-edition-team-spirit
 9,carcassonne,Carcassonne (2000),Classic,Medieval,Light,30,I,Original,"7,4",2-5,+8,2-4,30-60min,True,,https://boardgamegeek.com/boardgame/822/carcassonne
 10,catan,Catan (1995),Classic,Economical,Medium Light,40,I,Original,"7,1",3-4,+10,3-4,1h30,True,"missing one player aid, 1 blue road",https://boardgamegeek.com/boardgame/13/catan
 11,catan-seafarers,Catan: Seafarers (1997),Classic,Economical,Medium Light,30,I,Expansion,"7,1",3-4,+10,3-4,2h,True,,https://boardgamegeek.com/boardgame/325/catan-seafarers
-12,clank-catacombs,Clank: Catacombs (2022),Strategy/Deck Building,Fantasy/Adventure,Medium,70,A,Board Game,"8,2",2–4,13+,4,90min,True,,https://boardgamegeek.com/boardgame/365717/clank-catacombs
+12,clank-catacombs,Clank: Catacombs,Strategy/Deck Building,Fantasy/Adventure,Medium,70,A,Board Game,,2–4,13+,4,90,True,,https://boardgamegeek.com/boardgame/365717/clank-catacombs
 13,colt-express,Colt Express (2014),Party Game,Western,Medium Light,40,I,Original,"7,1",2-6,+8,5-6,40min,True,,https://boardgamegeek.com/boardgame/158899/colt-express
-14,coup,Coup (2012),Party/Bluffing,Political/Deception,Light,15,B,Card Game,"7,0",2–6,10+,5,20min,True,,https://boardgamegeek.com/boardgame/131357/coup
-15,cyclades-legendary-edition,Cyclades: Legendary Edition (2024),Strategy,Mythology,Medium-Heavy,100,S,Board Game,"8,1",2–6,14+,4,90min,True,,https://boardgamegeek.com/boardgame/380619/cyclades-legendary-edition
+14,coup,Coup,Party/Bluffing,Political/Deception,Light,15,B,Card Game,,2–6,10+,5,15,True,,https://boardgamegeek.com/boardgame/131357/coup
+15,cyclades-legendary-edition,Cyclades: Legendary Edition (2024),Strategy,Mythology,Medium-Heavy,100,S,Board Game,,2–6,14+,4,90,True,,https://boardgamegeek.com/boardgame/380619/cyclades-legendary-edition
 16,dead-of-winter-a-crossroads-game,Dead of Winter: A Crossroads Game (2014),Semi-Cooperative,Zombies,Medium,70,II,Original,"7,5",2-5,+12,3-4,2-3h,True,,https://boardgamegeek.com/boardgame/150376/dead-of-winter-a-crossroads-game
-17,dominion,Dominion (2008),Deck Builder,Medieval,Medium Light,45,I,Original,"7,6",2-4,+10,3-4,40-60min,True,,https://boardgamegeek.com/boardgame/36218/dominion
-18,dune-imperium,Dune Imperium (2020),Hybrid,Sci-Fi,Medium Heavy,60,I,Original,"8,4",1-4,+12,3-4,1-3h,True,,https://boardgamegeek.com/boardgame/316554/dune-imperium
-19,ghost-stories,Ghost Stories (2008),Cooperative,Oriental Horror,Medium,45,I,Original,"7,3",1-4,+12,4,1h,True,,https://boardgamegeek.com/boardgame/37046/ghost-stories
-20,heat-pedal-to-the-metal,Heat: Pedal to the Metal (2022),Race,Race,Medium Light,60,I,Original,"8,2",1-6,+8,3-6,1h,True,,https://boardgamegeek.com/boardgame/366013/heat-pedal-to-the-metal
-21,jamaica,Jamaica (2007),Race,Pirates,Light,40,I,Original,"7,1",2-6,+8,4-6,1h,True,,https://boardgamegeek.com/boardgame/28023/jamaica
-22,oh-my-goods,Oh My Goods! (2015),Economic,Economical,Medium,20,I,Original,"7,0",2-4,+10,3-4,30-60min,True,,https://boardgamegeek.com/boardgame/183840/oh-my-goods
-23,power-grid,Power Grid (2004),Classic,Economical,Medium,50,I,Original,"7,8",2-6,+12,3-6,2h,True,missing one coal resource,https://boardgamegeek.com/boardgame/2651/power-grid
-24,sushi-go-party,Sushi Go! Party (2016),Family/Card Drafting,Food,Light,25,B,Card Game,"7,4",2–8,8+,5,20min,True,,https://boardgamegeek.com/boardgame/192291/sushi-go-party
+17,dixit-odyssey,Dixit: Odyssey (2011),Social Deduction,Abstract,Light,35,I,Original,"7,4",3-12,+8,5-6,30-60min,True,,https://boardgamegeek.com/boardgame/92828/dixit-odyssey
+18,dominion,Dominion (2008),Deck Builder,Medieval,Medium Light,45,I,Original,"7,6",2-4,+10,3-4,40-60min,True,,https://boardgamegeek.com/boardgame/36218/dominion
+19,dune-imperium,Dune Imperium (2020),Hybrid,Sci-Fi,Medium Heavy,60,I,Original,"8,4",1-4,+12,3-4,1-3h,True,,https://boardgamegeek.com/boardgame/316554/dune-imperium
+20,exploding-kittens,Exploding Kittens (2015),Party/Card Game,Humor,Light,20,B,Card Game,"6,1",2-5,+7,4,15min,True,,https://boardgamegeek.com/boardgame/172225/exploding-kittens
+21,ghost-stories,Ghost Stories (2008),Cooperative,Oriental Horror,Medium,45,I,Original,"7,3",1-4,+12,4,1h,True,,https://boardgamegeek.com/boardgame/37046/ghost-stories
+22,gloomhaven,Gloomhaven (2017),Lifestyle Game,Fantasy,Heavy,120,II,Original,"8,7",1-4,+14,3-4,2h,True,,https://boardgamegeek.com/boardgame/174430/gloomhaven
+23,heat-pedal-to-the-metal,Heat: Pedal to the Metal (2022),Race,Race,Medium Light,60,I,Original,"8,2",1-6,+8,3-6,1h,True,,https://boardgamegeek.com/boardgame/366013/heat-pedal-to-the-metal
+24,jamaica,Jamaica (2007),Race,Pirates,Light,40,I,Original,"7,1",2-6,+8,4-6,1h,True,,https://boardgamegeek.com/boardgame/28023/jamaica
+25,marvel-dice-masters-uncanny-x-men,Marvel Dice Masters: Uncanny X-Men (2014),2-Player,Super-Hero,Medium,25,I,Original,"7,2",2,+12,2,1h,True,,https://boardgamegeek.com/boardgame/158275/marvel-dice-masters-uncanny-x-men
+26,oh-my-goods,Oh My Goods! (2015),Economic,Economical,Medium,20,I,Original,"7,0",2-4,+10,3-4,30-60min,True,,https://boardgamegeek.com/boardgame/183840/oh-my-goods
+27,pandemic,Pandemic (2008),Cooperative,Medical,Medium Light,40,I,Original,"7,6",2-4,+10,3-4,1h,True,,https://boardgamegeek.com/boardgame/30549/pandemic
+28,power-grid,Power Grid (2004),Classic,Economical,Medium,50,I,Original,"7,8",2-6,+12,3-6,2h,True,missing one coal resource,https://boardgamegeek.com/boardgame/2651/power-grid
+29,shadows-over-camelot,Shadows over Camelot (2005),Semi-Cooperative,Medieval,Medium,80,II,Original,"7,1",3-7,+10,4-7,2h,True,Missing one barbarian miniature,https://boardgamegeek.com/boardgame/15062/shadows-over-camelot
+30,slay-the-spire-the-board-game,Slay the Spire: The Board Game (2024),Cooperative Deck Builder,Fantasy,Medium Heavy,120,S,Board Game,"8,6",1-4,+12,1-4,30-150min,True,,https://boardgamegeek.com/boardgame/338960/slay-the-spire-the-board-game
+31,sushi-go-party,Sushi Go! Party,Family/Card Drafting,Food,Light,25,B,Card Game,,2–8,8+,5,20,True,,https://boardgamegeek.com/boardgame/192291/sushi-go-party
+32,ticket-to-ride-europe,Ticket to Ride: Europe (2005),Classic,Trains,Medium Light,45,I,Original,"7,5",2-5,+8,3-5,30-60min,True,,https://boardgamegeek.com/boardgame/14996/ticket-to-ride-europe
+33,tiny-epic-dungeons,Tiny Epic Dungeons (2021),Cooperative,Fantasy,Medium,30,I,Original,"7,6",1-4,+12,3-4,1h30,True,,https://boardgamegeek.com/boardgame/331787/tiny-epic-dungeons
+34,ubongo,Ubongo (2003),Puzzle,Abstract,Light,35,I,Original,"6,7",1-4,+8,2-4,25min,True,,https://boardgamegeek.com/boardgame/16986/ubongo
