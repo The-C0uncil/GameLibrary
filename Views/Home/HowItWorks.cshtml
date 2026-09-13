@@ -1,0 +1,92 @@
+@{
+    Layout = "_Layout"; ViewData["Title"] = "Como funciona";
+}
+
+<section id="modelos" class="council-section parchment">
+    <div class="container-xxl"><span class="section-number">01</span>
+        <h2>Modelos de jogo</h2>
+        <p class="lead">Diferentes caminhos. A mesma mesa.</p>
+        <p class="intro-copy">Traz o teu grupo ou descobre uma nova aventura. Escolhe a experiência que combina contigo.
+        </p>
+        <div class="row g-4 mt-3">
+            <div class="col-sm-6 col-lg-3">
+                <div class="art-placeholder art-board" role="img" aria-label="Espaço reservado para jogos de tabuleiro">
+                </div>
+                <h3>Jogos de tabuleiro</h3>
+                <p>Descobre novos jogos e partilha os teus favoritos à volta da mesa.</p>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="art-placeholder art-party" role="img" aria-label="Espaço reservado para RPG com o teu DM">
+                </div>
+                <h3>TTRPG com o teu DM</h3>
+                <p>Traz o teu grupo e o teu Game Master. A aventura é vossa.</p>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="art-placeholder art-guided" role="img" aria-label="Espaço reservado para RPG com DM pago">
+                </div>
+                <h3>TTRPG com DM pago</h3>
+                <p>Entra numa aventura conduzida por um dos nossos Game Masters.</p>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="art-placeholder art-workshop" role="img" aria-label="Espaço reservado para workshop"></div>
+                <h3>Workshop</h3>
+                <p>Explora novas ideias e desenvolve competências ligadas ao mundo dos jogos. (A anunciar...)</p>
+            </div>
+        </div>
+    </div>
+</section>
+@await Html.PartialAsync("_Pricing")
+<section id="reservas" class="council-section parchment">
+    <div class="container-xxl"><span class="section-number">03</span>
+        <h2>Reservas</h2>
+        <p class="lead">Há um lugar para ti à mesa.</p>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4"><span class="step-number">1</span>
+                <h3>Escolhe como jogar</h3>
+                <p>Encontra o modelo de jogo que combina contigo e com o teu grupo.</p>
+            </div>
+            <div class="col-md-4"><span class="step-number">2</span>
+                <h3>Combina a tua sessão</h3>
+                <p>Fala connosco para saberes as datas e a disponibilidade.</p>
+            </div>
+            <div class="col-md-4"><span class="step-number">3</span>
+                <h3>Confirma a tua presença</h3>
+                <p>Recebe os detalhes da sessão e prepara-te para jogar.</p>
+            </div>
+        </div><button class="btn btn-council mt-4" type="button" data-council-contact>Fala connosco</button>
+    </div>
+</section>
+<section id="regras" class="council-section rules-section">
+    <div class="container-xxl">
+        <div class="row g-5">
+            <div class="col-lg-8"><span class="section-number">04</span>
+                <h2>Regras</h2>
+                <p class="lead">Uma mesa onde todos se sentem bem.</p>
+                <p class="intro-copy">Jogamos com respeito, simpatia e uma mente aberta. Seja qual for a tua
+                    experiência, ajuda-nos a tornar a mesa um lugar acolhedor.</p>
+                    <div class="row g-4 mt-3">
+                        <div class="col-md-4">
+                            <h3>Respeita as pessoas</h3>
+                            <p>Ouve os outros e respeita os seus limites.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Cuida do espaço</h3>
+                            <p>Trata os jogos e os materiais com cuidado.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Recebe quem chega</h3>
+                            <p>Ajuda quem está a descobrir o jogo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="art-placeholder art-banner" role="img"
+                         aria-label="Espaço reservado para estandarte The Council"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @section Scripts {
+        <script src="@Url.Content("~/js/council-prices.js")"></script>
+        <script src="@Url.Content("~/js/council-pricing.js")"></script>
+    }

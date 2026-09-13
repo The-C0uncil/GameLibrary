@@ -1,0 +1,40 @@
+@{
+    Layout = "_Layout"; ViewData["Title"] = "Como é que queres jogar?";
+}
+<section class="council-hero hero-home">
+    <div class="container-xxl">
+        <div class="hero-copy">
+            <p class="eyebrow">TABLETOP GAMING · BRAGA</p>
+            <h1>COMO É QUE<br />QUERES JOGAR?</h1>
+            <p class="hero-subtitle">A tua mesa. A tua história.</p><a class="council-link"
+                                                                       href="@Url.Action("HowItWorks", "Home")">Como funciona? <span aria-hidden="true">↓</span></a>
+        </div>
+    </div>
+</section>
+<section class="council-section home-about">
+    <div class="container-xxl">
+        <div class="section-heading">
+            <h2>Sobre</h2><span class="eyebrow">MAIS DO QUE JOGOS</span>
+        </div>
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-4">
+                <h3>Projeto</h3>
+                <p class="lead">A nossa mesa também é tua.</p>
+                <p>The Council nasceu de um grupo de amigos e da vontade de ir mais longe nos jogos de mesa. Criamos cenários à mão, exploramos novas mecânicas e damos vida a mundos. Agora, abrimos a nossa mesa para partilhar essa paixão contigo.</p><a
+                class="council-link" href="@Url.Action("About", "Home")#projeto">Conhece o projeto →</a>
+            </div>
+            <div class="col-lg-4">
+                <div class="art-placeholder art-table" role="img"
+                     aria-label="Espaço reservado para imagem de uma mesa de jogo"></div>
+            </div>
+            <div class="col-lg-4">
+                <h3>Game Masters</h3>
+                <p class="lead">Diferentes estilos. A mesma paixão por jogar.</p>
+                <p>Somos os teus anfitriões à mesa. Ajudamos-te a escolher um jogo, descobrir as regras ou viver uma
+                    campanha. Do primeiro jogo à próxima grande aventura, adaptamos o acompanhamento ao teu grupo e à
+                    forma como queres jogar.</p><a class="council-link"
+                                                   href="@Url.Action("About", "Home")#game-masters">Conhece os Game Masters →</a>
+                </div>
+            </div>
+        </div>
+    </section>

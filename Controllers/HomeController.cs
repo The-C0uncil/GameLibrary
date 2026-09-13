@@ -17,12 +17,18 @@ namespace GameLibrary.Controllers
             _emailService = emailService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() => View("Landing");
+
+        public IActionResult HowItWorks() => View();
+
+        public IActionResult About() => View();
+
+        public IActionResult Library()
         {
             var games = _gameService.GetAllGames();
             var openRentals = _gameService.GetOpenRentalsByGameId();
             ViewBag.OpenRentals = openRentals;
-            return View(games);
+            return View("Index", games);
         }
 
 

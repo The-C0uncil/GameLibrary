@@ -1512,3 +1512,8 @@ body {
 #clearFiltersBtn{
     color: var(--accent);
 }
+
+.brand-logo {
+    height:2rem;
+    width: 2rem;
+}
