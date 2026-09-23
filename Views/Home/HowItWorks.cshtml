@@ -36,8 +36,40 @@
     </div>
 </section>
 @await Html.PartialAsync("_Pricing")
-<section id="reservas" class="council-section parchment">
-    <div class="container-xxl"><span class="section-number">03</span>
+<section id="horarios" class="council-section hours-section" aria-labelledby="horarios-title">
+    <div class="container-xxl">
+        <span class="section-number" aria-hidden="true">03</span>
+        <h2 id="horarios-title" class="text-center">Quando queres jogar?</h2>
+        <div class="ornament gold" aria-hidden="true">◇</div>
+        <p class="hours-intro">Escolhe o horário que funciona melhor para o teu grupo. A mesa é vossa durante 5 horas.</p>
+
+        <div class="hours-grid">
+            <article class="hours-card">
+                <h3>2ª Feira a 6ª Feira</h3>
+                <div class="hours-card-body">
+                    <div class="hours-window">
+                        <p class="hours-time">19h00 <span aria-hidden="true">—</span> 00h00</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="hours-card">
+                <h3>Sábados, Domingos e Feriados <span class="hours-star" aria-hidden="true">✦</span></h3>
+                <div class="hours-card-body">
+                    <div class="hours-window">
+                        <p class="hours-time">13h00 <span aria-hidden="true">—</span> 18h00</p>
+                    </div>
+                    <div class="hours-window">
+                        <p class="hours-time">19h00 <span aria-hidden="true">—</span> 00h00</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <p class="hours-note"><span aria-hidden="true">✦</span> Apenas em feriados selecionados.</p>
+    </div>
+</section>
+<section id="reservas" class="council-section reservations-section">
+    <div class="container-xxl"><span class="section-number">04</span>
         <h2>Reservas</h2>
         <p class="lead">Escolhe a tua mesa.</p>
         <div class="row g-4 mt-4">
@@ -59,7 +91,7 @@
 <section id="regras" class="council-section rules-section">
     <div class="container-xxl">
         <div class="row g-5">
-            <div class="col-lg-8"><span class="section-number">04</span>
+            <div class="col-lg-8"><span class="section-number">05</span>
                 <h2>Regras</h2>
                 <p class="lead">Uma mesa onde todos se sentem bem.</p>
                 <p class="intro-copy">Jogamos com respeito, simpatia e uma mente aberta. Seja qual for a tua

@@ -47,6 +47,7 @@ System.Text.RegularExpressions.Regex.IsMatch(whatsapp, "^[1-9][0-9]+$");
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="@(how)#modelos">Modelos de jogo</a></li>
                                         <li><a class="dropdown-item" href="@(how)#precos">Preços</a></li>
+                                        <li><a class="dropdown-item" href="@(how)#horarios">Horários</a></li>
                                         <li><a class="dropdown-item" href="@(how)#reservas">Reservas</a></li>
                                         <li><a class="dropdown-item" href="@(how)#regras">Regras</a></li>
                                     </ul>
@@ -78,7 +79,7 @@ System.Text.RegularExpressions.Regex.IsMatch(whatsapp, "^[1-9][0-9]+$");
                 @if (action == "HowItWorks" && controller == "Home")
                 {
                     <nav class="council-subnav" aria-label="Secções de Como funciona"><a href="#modelos">Modelos de jogo</a><a
-                        href="#precos">Preços</a><a href="#reservas">Reservas</a><a href="#regras">Regras</a></nav>
+                        href="#precos">Preços</a><a href="#horarios">Horários</a><a href="#reservas">Reservas</a><a href="#regras">Regras</a></nav>
                     }
                     @if (action == "About" && controller == "Home")
                     {
@@ -96,7 +97,7 @@ System.Text.RegularExpressions.Regex.IsMatch(whatsapp, "^[1-9][0-9]+$");
                                 </div>
                                 <div class="col-6 col-md-3">
                                     <h2>Explorar</h2><a href="@(how)#modelos">Modelos de jogo</a><a href="@(how)#precos">Preços</a><a
-                                    href="@(how)#reservas">Reservas</a><a href="@(how)#regras">Regras</a>
+                                    href="@(how)#horarios">Horários</a><a href="@(how)#reservas">Reservas</a><a href="@(how)#regras">Regras</a>
                                 </div>
                                 <div class="col-6 col-md-4">
                                     <h2>The Council</h2><a href="@(about)#projeto">Projeto</a><a href="@(about)#game-masters">Game
