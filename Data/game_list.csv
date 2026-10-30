@@ -1,48 +1,67 @@
-Id,Cover,Tabletop Game,Category,Theme,Complexity,Price,Tier,Type,BGG Score,Player Count,Age,Recommended Players,Avg. Playtime,Availability,Missing Parts,URL
-1,7-wonders-duel,7 Wonders Duel (2015),2-Player,Civilization,Medium Light,20,I,Original,"8,1",2,+10,2,30-60min,True,,https://boardgamegeek.com/boardgame/173346/7-wonders-duel
-2,alhambra,Alhambra (2003),Tile-Placement,Medieval,Medium Light,50,I,Original,"7,5",2-6,+8,2-6,1h,True,,https://boardgamegeek.com/boardgame/6249/alhambra
-3,bang-the-dice-game,BANG! The Dice Game (2013),Party Game,Western,Light,20,I,Original,"6,9",3-8,+8,5-8,20min,True,,https://boardgamegeek.com/boardgame/143741/bang-the-dice-game
-4,bang-the-dice-game-old-saloon,BANG! The Dice Game: Old Saloon (2016),Party Game,Western,Light,15,I,Expansion,"7,5",3-8,+8,5-8,20min,True,,https://boardgamegeek.com/boardgame/193614/bang-the-dice-game-old-saloon
-5,brass-birmingham,Brass: Birmingham (2018),Strategy,Industrial/Economic,Heavy,80,S,Board Game,,2–4,14+,3,120,True,,https://boardgamegeek.com/boardgame/224517/brass-birmingham
-6,ca-dollar-h-n-guns-second-edition,Ca$h 'n Guns (2nd Edition) (2014),Party Game,Crime,Light,40,I,Original,"6,9",4-8,+8,5-8,40min,True,,https://boardgamegeek.com/boardgame/155362/cash-n-guns-second-edition
-7,ca-dollar-h-n-guns-second-edition-more-ca-dollar-h,Ca$h 'n Guns (2nd Edition):  More Ca$h 'n More Guns (2015),Party Game,Crime,Light,20,I,Expansion,"7,3",4-8,+8,5-8,40min,True,,https://boardgamegeek.com/boardgame/181228/ca-dollar-h-n-guns-second-edition-more-ca-dollar-h
-8,ca-dollar-h-n-guns-second-edition-team-spirit,Ca$h 'n Guns (2nd Edition): Team Spirit (2016),Party Game,Crime,Light,20,I,Expansion,"7,3",4-9,+8,5-9,40min,True,,https://boardgamegeek.com/boardgame/199240/ca-dollar-h-n-guns-second-edition-team-spirit
-9,carcassonne,Carcassonne (2000),Classic,Medieval,Light,30,I,Original,"7,4",2-5,+8,2-4,30-60min,True,,https://boardgamegeek.com/boardgame/822/carcassonne
-10,catan,Catan (1995),Classic,Economical,Medium Light,40,I,Original,"7,1",3-4,+10,3-4,1h30,True,"missing one player aid, 1 blue road",https://boardgamegeek.com/boardgame/13/catan
-11,catan-seafarers,Catan: Seafarers (1997),Classic,Economical,Medium Light,30,I,Expansion,"7,1",3-4,+10,3-4,2h,True,,https://boardgamegeek.com/boardgame/325/catan-seafarers
-12,clank-catacombs,Clank: Catacombs,Strategy/Deck Building,Fantasy/Adventure,Medium,70,A,Board Game,,2–4,13+,4,90,True,,https://boardgamegeek.com/boardgame/365717/clank-catacombs
-13,colt-express,Colt Express (2014),Party Game,Western,Medium Light,40,I,Original,"7,1",2-6,+8,5-6,40min,True,,https://boardgamegeek.com/boardgame/158899/colt-express
-14,coup,Coup,Party/Bluffing,Political/Deception,Light,15,B,Card Game,,2–6,10+,5,15,True,,https://boardgamegeek.com/boardgame/131357/coup
-15,cyclades-legendary-edition,Cyclades: Legendary Edition (2024),Strategy,Mythology,Medium-Heavy,100,S,Board Game,,2–6,14+,4,90,True,,https://boardgamegeek.com/boardgame/380619/cyclades-legendary-edition
-16,dead-of-winter-a-crossroads-game,Dead of Winter: A Crossroads Game (2014),Semi-Cooperative,Zombies,Medium,70,II,Original,"7,5",2-5,+12,3-4,2-3h,True,,https://boardgamegeek.com/boardgame/150376/dead-of-winter-a-crossroads-game
-17,dixit-odyssey,Dixit: Odyssey (2011),Social Deduction,Abstract,Light,35,I,Original,"7,4",3-12,+8,5-6,30-60min,True,,https://boardgamegeek.com/boardgame/92828/dixit-odyssey
-18,dominion,Dominion (2008),Deck Builder,Medieval,Medium Light,45,I,Original,"7,6",2-4,+10,3-4,40-60min,True,,https://boardgamegeek.com/boardgame/36218/dominion
-19,dune-imperium,Dune Imperium (2020),Hybrid,Sci-Fi,Medium Heavy,60,I,Original,"8,4",1-4,+12,3-4,1-3h,True,,https://boardgamegeek.com/boardgame/316554/dune-imperium
-20,exploding-kittens,Exploding Kittens (2015),Party/Card Game,Humor,Light,20,B,Card Game,"6,1",2-5,+7,4,15min,True,,https://boardgamegeek.com/boardgame/172225/exploding-kittens
-21,ghost-stories,Ghost Stories (2008),Cooperative,Oriental Horror,Medium,45,I,Original,"7,3",1-4,+12,4,1h,True,,https://boardgamegeek.com/boardgame/37046/ghost-stories
-22,gloomhaven,Gloomhaven (2017),Lifestyle Game,Fantasy,Heavy,120,II,Original,"8,7",1-4,+14,3-4,2h,True,,https://boardgamegeek.com/boardgame/174430/gloomhaven
-23,heat-pedal-to-the-metal,Heat: Pedal to the Metal (2022),Race,Race,Medium Light,60,I,Original,"8,2",1-6,+8,3-6,1h,True,,https://boardgamegeek.com/boardgame/366013/heat-pedal-to-the-metal
-24,jamaica,Jamaica (2007),Race,Pirates,Light,40,I,Original,"7,1",2-6,+8,4-6,1h,True,,https://boardgamegeek.com/boardgame/28023/jamaica
-25,marvel-dice-masters-uncanny-x-men,Marvel Dice Masters: Uncanny X-Men (2014),2-Player,Super-Hero,Medium,25,I,Original,"7,2",2,+12,2,1h,True,,https://boardgamegeek.com/boardgame/158275/marvel-dice-masters-uncanny-x-men
-26,oh-my-goods,Oh My Goods! (2015),Economic,Economical,Medium,20,I,Original,"7,0",2-4,+10,3-4,30-60min,True,,https://boardgamegeek.com/boardgame/183840/oh-my-goods
-27,pandemic,Pandemic (2008),Cooperative,Medical,Medium Light,40,I,Original,"7,6",2-4,+10,3-4,1h,True,,https://boardgamegeek.com/boardgame/30549/pandemic
-28,power-grid,Power Grid (2004),Classic,Economical,Medium,50,I,Original,"7,8",2-6,+12,3-6,2h,True,missing one coal resource,https://boardgamegeek.com/boardgame/2651/power-grid
-29,shadows-over-camelot,Shadows over Camelot (2005),Semi-Cooperative,Medieval,Medium,80,II,Original,"7,1",3-7,+10,4-7,2h,True,Missing one barbarian miniature,https://boardgamegeek.com/boardgame/15062/shadows-over-camelot
-30,slay-the-spire-the-board-game,Slay the Spire: The Board Game (2024),Cooperative Deck Builder,Fantasy,Medium Heavy,120,S,Board Game,"8,6",1-4,+12,1-4,30-150min,True,,https://boardgamegeek.com/boardgame/338960/slay-the-spire-the-board-game
-31,sushi-go-party,Sushi Go! Party,Family/Card Drafting,Food,Light,25,B,Card Game,,2–8,8+,5,20,True,,https://boardgamegeek.com/boardgame/192291/sushi-go-party
-32,ticket-to-ride-europe,Ticket to Ride: Europe (2005),Classic,Trains,Medium Light,45,I,Original,"7,5",2-5,+8,3-5,30-60min,True,,https://boardgamegeek.com/boardgame/14996/ticket-to-ride-europe
-33,tiny-epic-dungeons,Tiny Epic Dungeons (2021),Cooperative,Fantasy,Medium,30,I,Original,"7,6",1-4,+12,3-4,1h30,True,,https://boardgamegeek.com/boardgame/331787/tiny-epic-dungeons
-34,ubongo,Ubongo (2003),Puzzle,Abstract,Light,35,I,Original,"6,7",1-4,+8,2-4,25min,True,,https://boardgamegeek.com/boardgame/16986/ubongo
-35,a-game-of-thrones-the-board-game-second-edition,A Game of Thrones: The Board Game Mother of Dragons (2nd Edition),War Game,Medieval,Medium Heavy,50 €,Tier I,Expansion,"8,40",3-8,14,6,120-240,True,,https://boardgamegeek.com/boardgame/103343/a-game-of-thrones-the-board-game-second-edition
-36,a-game-of-thrones-the-board-game-second-edition,A Game of Thrones: The Board Game (2nd Edition) (2011),War Game,Medieval,Medium Heavy,60 €,Tier I,Original,"7,6",3-6,+14,6,4-6h,True,,https://boardgamegeek.com/boardgame/103343/a-game-of-thrones-the-board-game-second-edition
-37,dune-imperium,Dune Imperium: Rise of Ix (2022),Hybrid,Sci-Fi,Medium,40 €,Tier I,Expansion,"8,8",3-4,+12,3-4,1-3h,True,,https://boardgamegeek.com/boardgame/316554/dune-imperium
-38,eclipse-new-dawn-for-the-galaxy,Eclipse (2011),War Game,Sci-Fi,Heavy,80 €,Tier II,Original,"7,9",2-6,+14,2-6,3-4h,True,,https://boardgamegeek.com/boardgame/72125/eclipse
-39,heroes-of-land-air-and-sea,"Heroes of Land, Air and Sea (2018)",War Game,Fantasy,Medium Heavy,160 €,Tier III,Original,"7,6",1-4,+14,3-4,2-4h,True,,https://boardgamegeek.com/boardgame/198830/heroes-of-land-air-sea
-40,heroes-of-land-air-and-sea-mercenaries-expansion-p,"Heroes of Land, Air and Sea - Mercenaries Expansion Pack #1 (2018)",War Game,Fantasy,Medium Heavy,30 €,Tier I,Expansion,"7,8",1-4,+14,3-4,2-4h,True,,https://boardgamegeek.com/boardgame/255678/heroes-of-land-air-sea-mercenaries-expansion
-41,heroes-of-land-air-and-sea-mercenaries-expansion-p2,"Heroes of Land, Air and Sea - Mercenaries Expansion Pack #2 (2018)",War Game,Fantasy,Medium Heavy,20 €,Tier I,Expansion,"7,8",1-6,+14,3-5,2-4h,True,,https://boardgamegeek.com/boardgame/255678/heroes-of-land-air-sea-mercenaries-expansion
-42,heroes-of-land-air-and-sea-mercenaries-expansion-p3,"Heroes of Land, Air and Sea - Mercenaries Expansion Pack #3 (2018)",War Game,Fantasy,Medium Heavy,30 €,Tier I,Expansion,"7,8",1-7,+14,3-5,2-4h,True,,https://boardgamegeek.com/boardgame/255678/heroes-of-land-air-sea-mercenaries-expansion
-43,heroes-of-land-air-and-sea-nomads-mini-expansion,"Heroes of Land, Air and Sea - Nomads Mini-Expansion (2018)",War Game,Fantasy,Medium Heavy,20 €,Tier I,Expansion,"7,6",1-6,+14,3-5,2-4h,True,,https://boardgamegeek.com/boardgame/255680/heroes-of-land-air-sea-nomads
-44,heroes-of-land-air-and-sea-order-and-chaos,"Heroes of Land, Air and Sea - Order & Chaos (2018)",War Game,Fantasy,Medium Heavy,160 €,Tier III,Expansion,"8,2",1-6,+14,3-5,2-4h,True,,https://boardgamegeek.com/boardgame/255679/heroes-of-land-air-sea-order-chaos
-45,heroes-of-land-air-and-sea-pestilence,"Heroes of Land, Air and Sea - Pestilence (2019)",War Game,Fantasy,Medium Heavy,120 €,Tier II,Expansion,"8,2",1-7,+14,3-5,2-4h,True,,https://boardgamegeek.com/boardgame/255681/heroes-of-land-air-sea-pestilence
-46,heroes-of-land-air-and-sea-pestilence-booster-pack,"Heroes of Land, Air and Sea - Pestilence Booster Pack (2019)",War Game,Fantasy,Medium Heavy,20 €,Tier I,Expansion,"7,8",1-7,+14,3-5,2-4h,True,,https://boardgamegeek.com/boardgame/255681/heroes-of-land-air-sea-pestilence
-47,heroes-of-land-air-and-sea-siege-engines-mini-expa,"Heroes of Land, Air and Sea - Siege Engines Mini-Expansion (2018)",War Game,Fantasy,Medium Heavy,20 €,Tier I,Expansion,7.6,1-7,+14,3-5,2-4h,True,,https://boardgamegeek.com/boardgame/255682/heroes-of-land-air-sea-siege-engines
+Id;Cover;Tabletop Game;Category;Theme;Complexity;Price;Tier;Type;BGG Score;Player Count;Age;Recommended Players;Avg. Playtime;Availability;Missing Parts;URL
+1;7-wonders-duel;7 Wonders Duel (2015);2-Player;Civilization;Medium Light;20;I;Original;8,1;2;10+;2;30-60min;TRUE;;https://boardgamegeek.com/boardgame/173346/7-wonders-duel
+2;alhambra;Alhambra (2003);Tile-Placement;Medieval;Medium Light;50;I;Original;7,5;2-6;8+;2-6;1h;TRUE;;https://boardgamegeek.com/boardgame/6249/alhambra
+3;bang-the-dice-game;BANG! The Dice Game (2013);Party Game;Western;Light;20;I;Original;6,9;3-8;8+;5-8;20min;TRUE;;https://boardgamegeek.com/boardgame/143741/bang-the-dice-game
+4;bang-the-dice-game-old-saloon;BANG! The Dice Game: Old Saloon (2016);Party Game;Western;Light;15;I;Expansion;7,5;3-8;8+;5-8;20min;TRUE;;https://boardgamegeek.com/boardgame/193614/bang-the-dice-game-old-saloon
+5;brass-birmingham;Brass: Birmingham (2018);Strategy;Economical;Heavy;80;II;Original;;2-4;14+;3-4;2h;TRUE;;https://boardgamegeek.com/boardgame/224517/brass-birmingham
+6;ca-dollar-h-n-guns-second-edition;Ca$h 'n Guns (2nd Edition) (2014);Party Game;Crime;Light;40;I;Original;6,9;4-8;8+;5-8;40min;TRUE;;https://boardgamegeek.com/boardgame/155362/cash-n-guns-second-edition
+7;ca-dollar-h-n-guns-second-edition-more-ca-dollar-h;Ca$h 'n Guns (2nd Edition):  More Ca$h 'n More Guns (2015);Party Game;Crime;Light;20;I;Expansion;7,3;4-8;8+;5-8;40min;TRUE;;https://boardgamegeek.com/boardgame/181228/ca-dollar-h-n-guns-second-edition-more-ca-dollar-h
+8;ca-dollar-h-n-guns-second-edition-team-spirit;Ca$h 'n Guns (2nd Edition): Team Spirit (2016);Party Game;Crime;Light;20;I;Expansion;7,3;4-9;8+;5-9;40min;TRUE;;https://boardgamegeek.com/boardgame/199240/ca-dollar-h-n-guns-second-edition-team-spirit
+9;carcassonne;Carcassonne (2000);Classic;Medieval;Light;30;I;Original;7,4;2-5;8+;2-4;30-60min;TRUE;;https://boardgamegeek.com/boardgame/822/carcassonne
+10;catan;Catan (1995);Classic;Economical;Medium Light;40;I;Original;7,1;3-4;10+;3-4;1h30;TRUE;missing one player aid, 1 blue road;https://boardgamegeek.com/boardgame/13/catan
+11;catan-seafarers;Catan: Seafarers (1997);Classic;Economical;Medium Light;30;I;Expansion;7,1;3-4;10+;3-4;2h;TRUE;;https://boardgamegeek.com/boardgame/325/catan-seafarers
+12;clank-catacombs;Clank: Catacombs (2022);Deck Building;Fantasy;Medium;70;II;Original;;2-4;13+;4;1h30;TRUE;;https://boardgamegeek.com/boardgame/365717/clank-catacombs
+13;colt-express;Colt Express (2014);Party Game;Western;Medium Light;40;I;Original;7,1;2-6;9+;5-6;40min;TRUE;;https://boardgamegeek.com/boardgame/158899/colt-express
+14;coup;Coup (2012);Social Deduction;Political;Light;15;I;Original;;2-6;10+;5;15min;TRUE;;https://boardgamegeek.com/boardgame/131357/coup
+15;cyclades-legendary-edition;Cyclades: Legendary Edition (2024);Strategy;Mythology;Medium-Heavy;100;II;Original;;2-6;14+;4;1h30;TRUE;;https://boardgamegeek.com/boardgame/380619/cyclades-legendary-edition
+16;dead-of-winter-a-crossroads-game;Dead of Winter: A Crossroads Game (2014);Semi-Cooperative;Zombies;Medium;70;II;Original;7,5;2-5;12+;3-4;2-3h;TRUE;;https://boardgamegeek.com/boardgame/150376/dead-of-winter-a-crossroads-game
+17;dixit-odyssey;Dixit: Odyssey (2011);Social Deduction;Abstract;Light;35;I;Original;7,4;3-12;8+;5-6;30-60min;TRUE;;https://boardgamegeek.com/boardgame/92828/dixit-odyssey
+18;dominion;Dominion (2008);Deck Builder;Medieval;Medium Light;45;I;Original;7,6;2-4;10+;3-4;40-60min;TRUE;;https://boardgamegeek.com/boardgame/36218/dominion
+19;dune-imperium;Dune Imperium (2020);Hybrid;Sci-Fi;Medium Heavy;60;I;Original;8,4;1-4;12+;3-4;1-3h;TRUE;;https://boardgamegeek.com/boardgame/316554/dune-imperium
+20;exploding-kittens;Exploding Kittens (2015);Party/Card Game;Humor;Light;20;I;Original;6,1;2-5;7+;4;15min;TRUE;;https://boardgamegeek.com/boardgame/172225/exploding-kittens
+21;ghost-stories;Ghost Stories (2008);Cooperative;Horror;Medium;45;I;Original;7,3;1-4;12+;4;1h;TRUE;;https://boardgamegeek.com/boardgame/37046/ghost-stories
+22;gloomhaven;Gloomhaven (2017);Lifestyle Game;Fantasy;Heavy;120;II;Original;8,7;1-4;14+;3-4;2h;TRUE;;https://boardgamegeek.com/boardgame/174430/gloomhaven
+23;heat-pedal-to-the-metal;Heat: Pedal to the Metal (2022);Race;Race;Medium Light;60;I;Original;8,2;1-6;8+;3-6;1h;TRUE;;https://boardgamegeek.com/boardgame/366013/heat-pedal-to-the-metal
+24;jamaica;Jamaica (2007);Race;Pirates;Light;40;I;Original;7,1;2-6;8+;4-6;1h;TRUE;;https://boardgamegeek.com/boardgame/28023/jamaica
+25;marvel-dice-masters-uncanny-x-men;Marvel Dice Masters: Uncanny X-Men (2014);2-Player;Super-Hero;Medium;25;I;Original;7,2;2;12+;2;1h;TRUE;;https://boardgamegeek.com/boardgame/158275/marvel-dice-masters-uncanny-x-men
+26;oh-my-goods;Oh My Goods! (2015);Economic;Economical;Medium;20;I;Original;7;2-4;10+;3-4;30-60min;TRUE;;https://boardgamegeek.com/boardgame/183840/oh-my-goods
+27;pandemic;Pandemic (2008);Cooperative;Medical;Medium Light;40;I;Original;7,6;2-4;10+;3-4;1h;TRUE;;https://boardgamegeek.com/boardgame/30549/pandemic
+28;power-grid;Power Grid (2004);Classic;Economical;Medium;50;I;Original;7,8;2-6;12+;3-6;2h;TRUE;missing one coal resource;https://boardgamegeek.com/boardgame/2651/power-grid
+29;shadows-over-camelot;Shadows over Camelot (2005);Semi-Cooperative;Medieval;Medium;80;II;Original;7,1;3-7;10+;4-7;2h;TRUE;Missing one barbarian miniature;https://boardgamegeek.com/boardgame/15062/shadows-over-camelot
+30;slay-the-spire-the-board-game;Slay the Spire: The Board Game (2024);Cooperative Deck Builder;Fantasy;Medium Heavy;120;II;Original;8,6;1-4;12+;1-4;30-150min;TRUE;;https://boardgamegeek.com/boardgame/338960/slay-the-spire-the-board-game
+31;sushi-go-party;Sushi Go! Party;Card Drafting;Food;Light;25;I;Original;;2-8;8+;5;20min;TRUE;;https://boardgamegeek.com/boardgame/192291/sushi-go-party
+32;ticket-to-ride-europe;Ticket to Ride: Europe (2005);Classic;Trains;Medium Light;45;I;Original;7,5;2-5;8+;3-5;30-60min;TRUE;;https://boardgamegeek.com/boardgame/14996/ticket-to-ride-europe
+33;tiny-epic-dungeons;Tiny Epic Dungeons (2021);Cooperative;Fantasy;Medium;30;I;Original;7,6;1-4;12+;3-4;1h30;TRUE;;https://boardgamegeek.com/boardgame/331787/tiny-epic-dungeons
+34;ubongo;Ubongo (2003);Puzzle;Abstract;Light;35;I;Original;6,7;1-4;8+;2-4;25min;TRUE;;https://boardgamegeek.com/boardgame/16986/ubongo
+35;a-game-of-thrones-the-board-game-second-edition;A Game of Thrones: The Board Game Mother of Dragons (2nd Edition) (2018);Wargame;Medieval;Medium Heavy;50;I;Expansion;8,4;3-8;14+;6;2-4h;TRUE;;https://boardgamegeek.com/boardgame/103343/a-game-of-thrones-the-board-game-second-edition
+36;a-game-of-thrones-the-board-game-second-edition;A Game of Thrones: The Board Game (2nd Edition) (2011);Wargame;Medieval;Medium Heavy;60;I;Original;7,6;3-6;14+;6;4-6h;TRUE;;https://boardgamegeek.com/boardgame/103343/a-game-of-thrones-the-board-game-second-edition
+37;dune-imperium;Dune Imperium: Rise of Ix (2022);Hybrid;Sci-Fi;Medium;40;I;Expansion;8,8;3-4;12+;3-4;1-3h;TRUE;;https://boardgamegeek.com/boardgame/316554/dune-imperium
+38;eclipse-new-dawn-for-the-galaxy;Eclipse (2011);Wargame;Sci-Fi;Heavy;80;II;Original;7,9;2-6;14+;2-6;3-4h;TRUE;;https://boardgamegeek.com/boardgame/72125/eclipse
+39;heroes-of-land-air-and-sea;Heroes of Land, Air and Sea (2018);Wargame;Fantasy;Medium Heavy;160;III;Original;7,6;1-4;14+;3-4;2-4h;TRUE;;https://boardgamegeek.com/boardgame/198830/heroes-of-land-air-sea
+40;heroes-of-land-air-and-sea-mercenaries-expansion-p;Heroes of Land, Air and Sea - Mercenaries Expansion Pack #1 (2018);Wargame;Fantasy;Medium Heavy;30;I;Expansion;7,8;1-4;14+;3-4;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255678/heroes-of-land-air-sea-mercenaries-expansion
+41;heroes-of-land-air-and-sea-mercenaries-expansion-p2;Heroes of Land, Air and Sea - Mercenaries Expansion Pack #2 (2018);Wargame;Fantasy;Medium Heavy;20;I;Expansion;7,8;1-6;14+;3-5;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255678/heroes-of-land-air-sea-mercenaries-expansion
+42;heroes-of-land-air-and-sea-mercenaries-expansion-p3;Heroes of Land, Air and Sea - Mercenaries Expansion Pack #3 (2018);Wargame;Fantasy;Medium Heavy;30;I;Expansion;7,8;1-7;14+;3-5;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255678/heroes-of-land-air-sea-mercenaries-expansion
+43;heroes-of-land-air-and-sea-nomads-mini-expansion;Heroes of Land, Air and Sea - Nomads Mini-Expansion (2018);Wargame;Fantasy;Medium Heavy;20;I;Expansion;7,6;1-6;14+;3-5;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255680/heroes-of-land-air-sea-nomads
+44;heroes-of-land-air-and-sea-order-and-chaos;Heroes of Land, Air and Sea - Order & Chaos (2018);Wargame;Fantasy;Medium Heavy;160;III;Expansion;8,2;1-6;14+;3-5;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255679/heroes-of-land-air-sea-order-chaos
+45;heroes-of-land-air-and-sea-pestilence;Heroes of Land, Air and Sea - Pestilence (2019);Wargame;Fantasy;Medium Heavy;120;II;Expansion;8,2;1-7;14+;3-5;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255681/heroes-of-land-air-sea-pestilence
+46;heroes-of-land-air-and-sea-pestilence-booster-pack;Heroes of Land, Air and Sea - Pestilence Booster Pack (2019);Wargame;Fantasy;Medium Heavy;20;I;Expansion;7,8;1-7;14+;3-5;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255681/heroes-of-land-air-sea-pestilence
+47;heroes-of-land-air-and-sea-siege-engines-mini-expa;Heroes of Land, Air and Sea - Siege Engines Mini-Expansion (2018);Wargame;Fantasy;Medium Heavy;20;I;Expansion;7,6;1-7;14+;3-5;2-4h;TRUE;;https://boardgamegeek.com/boardgame/255682/heroes-of-land-air-sea-siege-engines
+48;aeon-trespass-odyssey;Aeon Trespass: Odyssey (2022);Lifestyle Game;Fantasy;Heavy;400;Unlimited;Original;9;1-4;14+;1-4;2h;TRUE;;https://boardgamegeek.com/boardgame/242705/aeon-trespass-odyssey
+49;ark-nova;Ark Nova (2021);Engine-Building;Animals;Medium Heavy;60;I;Original;8,6;1-4;14+;2-3;2-3h;TRUE;missing 2-hex enclosure;https://boardgamegeek.com/boardgame/342942/ark-nova
+50;arkham-horror-the-card-game-carnevale-of-horrors;Arkham Horror: The Card Game - Carnevale of Horrors (2016);LCG Cooperative;Horror;Medium;20;I;Expansion;8,1;1-2;14+;2;2-2h30;TRUE;;https://boardgamegeek.com/boardgame/215510/arkham-horror-the-card-game-carnevale-of-horrors-s
+51;arkham-horror-the-card-game;Arkham Horror: The Card Game (2016);LCG Cooperative;Horror;Medium;40;I;Original;8,2;1-2;14+;2;2-2h30;TRUE;;https://boardgamegeek.com/boardgame/205637/arkham-horror-the-card-game
+52;catan-the-duel;Catan: The Duel (2010);Classic;Medieval;Light;27;I;Original;6,9;2;10+;2;45-60min;TRUE;;https://boardgamegeek.com/boardgame/66056/rivals-for-catan
+53;dnd-onslaught;D&D Onslaught (2023);2-Player;Fantasy;Medium;150;III;Original;7,6;2;12+;2;1h30;TRUE;;https://boardgamegeek.com/boardgame/359835/dungeons-and-dragons-onslaught
+54;dnd-onslaught-red-wizards-expansion;D&D Onslaught: Red Wizards Expansion (2023);2-Player;Fantasy;Medium;60;I;Expansion;8,6;2;12+;2;1h30;TRUE;;https://boardgamegeek.com/boardgameexpansion/385622/dungeons-and-dragons-onslaught-red-wizards-faction
+55;dead-of-winter-the-long-night;Dead of Winter: The Long Night (2016);Semi-Cooperative;Zombies;Medium;70;II;Original;7,6;2-5;12+;3-5;2-3h;TRUE;;https://boardgamegeek.com/boardgame/193037/dead-of-winter-the-long-night
+56;dnd-castle-ravenloft-board-game;Dungeons & Dragons: Castle Ravenloft Board Game (2010);Cooperative;Fantasy;Medium Light;60;I;Original;7;1-5;10+;4;1h;TRUE;;https://boardgamegeek.com/boardgame/59946/dungeons-and-dragons-castle-ravenloft-board-game
+57;everdell-collectors-edition;Everdell Collector's Edition (2018);Worker Placement;Fantasy;Medium Light;60;I;Original;8;1-4;10+;3-4;1h30;TRUE;- 1 berry missing;https://boardgamegeek.com/boardgame/319422/everdell-collectors-edition
+58;frosthaven;Frosthaven (2022);Lifestyle Game;Fantasy;Heavy;250;III;Original;8,4;1-4;14+;3-4;2h30;TRUE;;https://boardgamegeek.com/boardgame/295770/frosthaven
+59;heat-heavy-rain;Heat: Heavy Rain (2024);Race;Race;Medium Light;30;I;Original;8,1;1-7;10+;5-6;1h;TRUE;;https://boardgamegeek.com/boardgame/410291/heat-heavy-rain
+60;level-7-omega-protocol;Level 7 [Omega Protocol] (2013);One vs. Many;Sci-Fi;Medium Heavy;90;II;Original;7,4;2-6;14+;4-5;2-3h;TRUE;;https://boardgamegeek.com/boardgame/137649/level-7-omega-protocol
+61;oh-my-goods-longsdale-in-revolt;Oh My Goods! Longsdale in Revolt (2016);Economic;Economical;Medium;20;I;Expansion;7,4;1-4;10+;1-4;30-60min;TRUE;;https://boardgamegeek.com/boardgame/209323/oh-my-goods-longsdale-in-revolt
+62;risk-1959;Risk (1959);Wargame;Military;Medium Light;40;I;Original;5,6;2-6;12+;3-6;2h;TRUE;- 1 cavalo amarelo miniatura;https://boardgamegeek.com/boardgame/181/risk
+63;tiny-epic-dungeons-stories;Tiny Epic Dungeons: Stories (2021);Cooperative;Fantasy;Medium;20;I;Expansion;8;1-4;12+;3-4;1h30;TRUE;;https://boardgamegeek.com/boardgame/334888/tiny-epic-dungeons-stories
+64;twilight-struggle;Twilight Struggle (2005);2-Player;Cold War;Medium Heavy;65;II;Original;8,3;2;14+;2;3-4h;TRUE;- (3 cards extra - 113 total not 110);https://boardgamegeek.com/boardgame/12333/twilight-struggle
+65;secret-hitler;Secret Hitler (2016);Party Game;Cold War;Medium Light;20;I;Original;7,5;5-10;14+;8,10;45min;TRUE;;https://boardgamegeek.com/boardgame/188834/secret-hitler
+66;catan-cities-and-knights;Catan: Cities & Knights (1998);Classic;Economical;Medium;40;I;Expansion;7,5;3-4;12+;3-4;1h30-2h30;TRUE;;https://boardgamegeek.com/boardgame/926/catan-cities-and-knights
